@@ -199,7 +199,7 @@ const logout = (req, res) => {
     // });
     res.clearCookie("jwt", {
       httpOnly: true,
-    //  secure: process.env.NODE_ENV === "production", // Set to true in production
+      //  secure: process.env.NODE_ENV === "production", // Set to true in production
       sameSite: "lax", // Adjust based on your needs
     });
     // Send success response
@@ -266,7 +266,7 @@ const signIn = async (req, res) => {
     res.cookie("jwt", token, {
       maxAge: 86400 * 1000, // Cookie expires in 1 day
       httpOnly: true,
-    //  secure: process.env.NODE_ENV === "production", // Set to true in production
+      secure: process.env.NODE_ENV === "production", // Set to true in production
       sameSite: "lax", // Adjust based on your needs
     });
 
