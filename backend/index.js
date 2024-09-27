@@ -26,10 +26,17 @@ app.use(express.json());
 // app.use(cors());
 app.use(cookieParser());
 
+const allowedOrigins = process.env.ORIGIN;
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", allowedOrigins); // Replace '*' with your domain if needed
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 //https://trooking.vercel.app/
 //origin: "http://localhost:3000",
-
-const allowedOrigins = process.env.ORIGIN;
 
 const corsOptions = {
   origin: allowedOrigins,
