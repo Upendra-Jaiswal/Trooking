@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import SignUp from "./components/HomePage/Authentication/SignUp";
 import SignIn from "./components/HomePage/Authentication/SignIn";
-import { AuthProvider, useAuth } from "./contexts/authContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import PrivateRoute from "./PrivateRoute";
 import MyProfile from "./components/NavBar/MyProfile";
 import BookingbyId from "./components/Bookingbyid/BookingbyId";
@@ -51,9 +51,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        {/* <Navbar /> */}
+        <Navbar />
 
-        <Navbar isAuthenticated={isAuthenticated} userName={userName} />
+        {/* <Navbar isAuthenticated={isAuthenticated} userName={userName} /> */}
         <Routes>
           {/* <PrivateRoute path="/profile" component={Profile} /> */}
 
