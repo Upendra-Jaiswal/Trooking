@@ -267,7 +267,7 @@ const signIn = async (req, res) => {
       maxAge: 86400 * 1000, // Cookie expires in 1 day
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Set to true in production
-      sameSite: "lax", // Adjust based on your needs
+      sameSite: "None", // Adjust based on your needs
     });
 
     // Send response with user details
