@@ -28,8 +28,11 @@ function App() {
     // Simulating an authentication check
     const checkAuth = async () => {
       // Fetch or check authentication status here
+
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
       // This is just a placeholder for demonstration
-      const user = await fetch("http://localhost:3001/api/verifyauth", {
+      const user = await fetch(`${backendUrl}/api/verifyauth`, {
         method: "GET",
         credentials: "include",
       });
