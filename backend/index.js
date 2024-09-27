@@ -28,8 +28,12 @@ app.use(cookieParser());
 
 //https://trooking.vercel.app/
 //origin: "http://localhost:3000",
+
+const allowedOrigins = process.env.ORIGIN;
+
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://trooking.vercel.app/"],
+  origin: allowedOrigins,
+
   methods: ["POST", "GET"],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
