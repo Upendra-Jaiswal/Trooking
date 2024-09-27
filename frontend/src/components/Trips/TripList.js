@@ -77,12 +77,11 @@ const TripsList = () => {
   const [bookings, setBookings] = useState([]); // State for booked trips
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
-
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const backendUrl = process.env.REACT_APP_BACKEND_URL;
-        const response = await axios.get(api/trips", {
+        const response = await axios.get(`${backendUrl}api/trips`, {
           withCredentials: true,
         });
         setTrips(response.data.data); // Extract trip data
@@ -99,7 +98,7 @@ const TripsList = () => {
   const handleBookTrip = async (tripId) => {
     try {
       const response = await axios.post(
-         `${backendUrl}/api/booktrip`, // Booking endpoint
+        `${backendUrl}/api/booktrip`, // Booking endpoint
         { tripId },
         { withCredentials: true } // Send cookies for authentication
       );
