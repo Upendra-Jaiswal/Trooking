@@ -8,7 +8,8 @@ const TaxiShow = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/gettaxibooking");
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/gettaxibooking`);
       if (!response.ok) {
         throw new Error("Failed to fetch bookings");
       }
@@ -51,9 +52,7 @@ const TaxiShow = () => {
       ) : (
         bookings.map((booking, index) => (
           <div key={index}>
-            <div
-              className="mb-4 p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
-            >
+            <div className="mb-4 p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
               <h3 className="text-xl font-semibold text-blue-500">
                 {booking.name}'s Booking
               </h3>
@@ -84,10 +83,12 @@ const TaxiShow = () => {
                     <strong>Vehicle Type:</strong> {selectedBooking.vehicleType}
                   </p>
                   <p>
-                    <strong>From Date:</strong> {formatDate(selectedBooking.fromDate)}
+                    <strong>From Date:</strong>{" "}
+                    {formatDate(selectedBooking.fromDate)}
                   </p>
                   <p>
-                    <strong>To Date:</strong> {formatDate(selectedBooking.toDate)}
+                    <strong>To Date:</strong>{" "}
+                    {formatDate(selectedBooking.toDate)}
                   </p>
                   <p>
                     <strong>Name:</strong> {selectedBooking.name}
@@ -99,7 +100,8 @@ const TaxiShow = () => {
                     <strong>Phone:</strong> {selectedBooking.phone}
                   </p>
                   <p>
-                    <strong>Traveling From:</strong> {selectedBooking.travelFrom}
+                    <strong>Traveling From:</strong>{" "}
+                    {selectedBooking.travelFrom}
                   </p>
                 </div>
                 <button

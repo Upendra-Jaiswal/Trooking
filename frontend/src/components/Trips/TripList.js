@@ -81,7 +81,8 @@ const TripsList = () => {
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/trips", {
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        const response = await axios.get(api/trips", {
           withCredentials: true,
         });
         setTrips(response.data.data); // Extract trip data
@@ -98,7 +99,7 @@ const TripsList = () => {
   const handleBookTrip = async (tripId) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/booktrip", // Booking endpoint
+         `${backendUrl}/api/booktrip`, // Booking endpoint
         { tripId },
         { withCredentials: true } // Send cookies for authentication
       );

@@ -10,9 +10,10 @@ const BookingForm = ({ trip, onClose }) => {
     setLoading(true);
 
     try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       // The token in the cookie will automatically be sent with this request
       const response = await axios.post(
-        `http://localhost:3001/api/booktrip`,
+        `${backendUrl}api/booktrip`,
         {
           tripId: trip._id, // Only pass the trip ID, userId will be handled by the backend
         },

@@ -159,8 +159,10 @@ const NavBar = () => {
   }, []);
 
   const logout = async () => {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
     await axios
-      .post("http://localhost:3001/api/logout", {}, { withCredentials: true })
+      .post(`${backendUrl}/api/logout`, {}, { withCredentials: true })
       .then((response) => {
         setIsAuthenticated(false);
         setUserName(null);

@@ -14,17 +14,17 @@ const SignUp = () => {
 
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    //   const response = await fetch(`${backendUrl}/api/signup`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ email, password, name, mobile }),
-    //   });
+      //   const response = await fetch(`${backendUrl}/api/signup`, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ email, password, name, mobile }),
+      //   });
 
+      // const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-
-      const response = await fetch(`http://localhost:3001/api/signup`, {
+      const response = await fetch(`${backendUrl}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,10 +32,9 @@ const SignUp = () => {
         body: JSON.stringify({ email, password, name, mobile }),
       });
 
-
       if (response.ok) {
         const result = await response.json();
-         console.log("User signed up:", result);
+        console.log("User signed up:", result);
         //  console.log("User signed up:", result.user._id);
         //  console.log("User signed up:", result.user);
         // if (typeof result === "object") {
@@ -46,7 +45,7 @@ const SignUp = () => {
         const userId = result.user._id;
         // Store user ID in local storage or state management
         localStorage.setItem("userId", userId);
-         console.log("userId", userId);
+        console.log("userId", userId);
 
         // const result = await response.json();
         // console.log("User signed up:", result);

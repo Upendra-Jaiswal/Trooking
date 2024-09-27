@@ -28,8 +28,9 @@ const HomeContainer = () => {
 
   const logout = async () => {
     try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       // Make a POST request to the logout endpoint
-      const response = await fetch("http://localhost:3001/api/logout", {
+      const response = await fetch(`${backendUrl}/api/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

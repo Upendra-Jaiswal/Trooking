@@ -42,7 +42,8 @@ const TaxiBooking = () => {
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
       try {
-        const response = await fetch("http://localhost:3001/api/taxibooking", {
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        const response = await fetch(`${backendUrl}/api/taxibooking`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

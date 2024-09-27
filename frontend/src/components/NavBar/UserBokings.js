@@ -9,8 +9,10 @@ const UserBookings = () => {
   useEffect(() => {
     const fetchUserBookings = async () => {
       try {
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
         const response = await axios.get(
-          "http://localhost:3001/api/getuserbookings",
+          `${backendUrl}/api/getuserbookings`,
           {
             withCredentials: true, // Include credentials for authentication
           }
