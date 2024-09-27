@@ -8,66 +8,8 @@ const SignIn = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Hook for navigation
 
-  const getenvurl = () => {
-    console.log(process.env.REACT_APP_BACKEND_URL);
-  };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-  //     const response = await fetch(`${backendUrl}/api/signin`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ email, password }),
-  //     });
-
-  //     if (response.ok) {
-  //       const result = await response.json();
-  //       console.log("User signed in:", result);
-  //       localStorage.setItem("token", result.token);
-  //       localStorage.setItem("userID", result.user._id);
-  //       // const userID = localStorage.getItem("userID");
-  //       // console.log("userid is ", userID);
-  //       navigate("/homepage"); // Redirect to layout page after sign-in
-  //     } else {
-  //       const errorData = await response.json();
-  //       setError(errorData.message || "An error occurred");
-  //     }
-  //   } catch (err) {
-  //     console.error("Error:", err);
-  //     setError("An error occurred");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    // try {
-    //   const response = await fetch(`${backendUrl}/api/signin`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: { email, password },
-    //     // body: JSON.stringify({ email, password }),
-    //     credentials: "include", // Include credentials with the request
-    //   });
-
-    //   // Check if the response is okay (status in the range 200-299)
-    //   if (!response.ok) {
-    //     throw new Error(`Error: ${response.status} ${response.statusText}`);
-    //   }
-
-    //   const data = await response.json(); // Parse the response data
-    //   console.log(data); // Handle the response here
-    //   navigate("/"); // Redirect to the home page after successful sign-in
-    // } catch (error) {
-    //   console.error("Error during sign-in:", error); // Handle any errors here
-    // }
 
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -141,14 +83,8 @@ const SignIn = () => {
             Sign Up
           </Link>
         </p>
-        <button className=" px-4 py-2" onClick={getenvurl}>
-          getenvurl
-        </button>
       </div>
-      <div>
-        hello
-        {/* <button onClick={}>Verify auth</button> */}
-      </div>
+      <div></div>
     </div>
   );
 };
