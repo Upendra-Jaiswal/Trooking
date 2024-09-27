@@ -9,7 +9,7 @@ const user1Routes = require("./routes/user1Routes");
 const taxiBookingRoutes = require("./routes/taxiBookingRoutes");
 const authMiddleware = require("./middlewares/authMiddleware");
 const tripRoutes = require("./routes/tripRoutes");
-const { protect, admin,protected } = require("./middlewares/authMiddleware");
+const { protect, admin, protected } = require("./middlewares/authMiddleware");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,8 +26,10 @@ app.use(express.json());
 // app.use(cors());
 app.use(cookieParser());
 
+//https://trooking.vercel.app/
+//origin: "http://localhost:3000",
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://trooking.vercel.app/"],
   methods: ["POST", "GET"],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
