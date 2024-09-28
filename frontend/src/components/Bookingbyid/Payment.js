@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 const Payment = () => {
   const [loading, setLoading] = useState(false);
   //   let { state } = useLocation();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   const location = useLocation();
   const amount = location.state?.amount;
@@ -24,7 +25,7 @@ const Payment = () => {
     console.log(data);
 
     await axios
-      .post("http://localhost:3001/order", { ...data })
+      .post(`${backendUrl}/order`, { ...data })
       .then((res) => {
         if (res.data && res.data.data.instrumentResponse.redirectInfo.url) {
           window.location.href =
