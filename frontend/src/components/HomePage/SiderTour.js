@@ -156,8 +156,45 @@ import tour6 from "../../assets/spitibackpack.jpeg";
 import tour7 from "../../assets/Spiti-Backpacking-Trip-JustWravel-1690460620.jpg";
 import tour8 from "../../assets/manali..backapck.jpeg";
 
+import img01 from "../../assets/tripsimages/IMG_5854.JPG";
+import img02 from "../../assets/tripsimages/IMG_5855.JPG";
+import img03 from "../../assets/tripsimages/IMG_5856.JPG";
+import img04 from "../../assets/tripsimages/IMG_5857.JPG";
+import img05 from "../../assets/tripsimages/IMG_5858.JPG";
+import img06 from "../../assets/tripsimages/IMG_5859.JPG";
+import img07 from "../../assets/tripsimages/IMG_5860.JPG";
+import { useNavigate } from "react-router-dom";
 const Carousel = () => {
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedTrips, setSelectedTrips] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const [slides, setSlides] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate(); // Hook for navigation
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const imageUrls = [img01, img02, img03, img04, img05, img06, img07, img06];
+
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/trips`, {
+          method: "GET",
+          credentials: "include", // This is crucial to send cookies
+        });
+        const data = await response.json();
+        if (data.success) {
+          setTrips(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching trip data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrips();
+  }, [backendUrl]);
 
   // Define slides with trip data for each image
   const slides = [
@@ -243,6 +280,41 @@ const Carousel = () => {
     ],
   ];
 
+  // Define a mapping of trip IDs to images
+  const imageMap = {
+    1: img01,
+    2: img02,
+    3: img03,
+    4: img04,
+    5: img05,
+    6: img06,
+    7: img07,
+  };
+
+  // useEffect(() => {
+  //   const fetchTrips = async () => {
+  //     try {
+  //       const response = await fetch("https://api.example.com/trips"); // Replace with your API endpoint
+  //       const data = await response.json();
+
+  //       // Format the slides with images from imageMap
+  //       const formattedSlides = data.map((trip) => ({
+  //         id: trip.id,
+  //         image: imageMap[trip.id], // Get the image from the mapping
+  //         text: trip.text,
+  //       }));
+
+  //       setSlides(formattedSlides);
+  //     } catch (error) {
+  //       console.error("Error fetching trip data:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchTrips();
+  // }, []);
+
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? slides.length - 1 : prevIndex - 1
@@ -262,6 +334,10 @@ const Carousel = () => {
 
     return () => clearInterval(interval); // Cleanup on component unmount
   }, [currentIndex]); // Add currentIndex to the dependency array to re-run effect on index change
+
+  const handleBookClick = (trip) => {
+    navigate("/bookingbyid", { state: { trip } }); // Pass the selected trip as state
+  };
 
   return (
     <div className="relative w-full mx-auto mt-8 p-4">
@@ -295,11 +371,16 @@ const Carousel = () => {
               className="carousel-slide relative flex-none w-full  gap-14 flex"
             >
               {slide.map((item) => (
-                <div key={item.id} className="relative w-full h-full">
+                <div
+                  key={item.id}
+                  className="relative w-full h-full"
+                  onClick={() => handleBookClick(trips[currentImageIndex])}
+                >
                   <img
                     src={item.image}
                     alt={`Slide ${item.id}`}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full cursor-pointer"
+                    // onClick={() => handleBookClick(trips[currentImageIndex])} // Navigate on image click
                   />
                   <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 p-4">
                     <h2 className="text-xl font-bold">{item.text}</h2>
@@ -310,7 +391,7 @@ const Carousel = () => {
           ))}
         </div>
       </div>
-      <div className="flex rounded-lg justify-center mt-4">
+      {/* <div className="flex rounded-lg justify-center mt-4">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -320,7 +401,7 @@ const Carousel = () => {
             }`}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

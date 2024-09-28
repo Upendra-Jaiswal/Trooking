@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const TaxiBanner = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="relative w-[900px] h-[500px]">
+    <div className="flex justify-center items-center h-full p-2 rounded-2xl">
+      <div className="relative w-full h-[240px] rounded-2xl">
         {/* Dimming Overlay */}
-        <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+        <div className="absolute inset-0 bg-black opacity-50 z-10 rounded-2xl"></div>
 
         {/* Taxi Image */}
         <img

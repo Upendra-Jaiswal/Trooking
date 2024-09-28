@@ -44,18 +44,18 @@ const TwoColumnLayout = () => {
     <div className="container mx-auto px-4 py-10">
       <div className="flex">
         {/* First Column */}
-        <div className="w-1/2 pr-4">
+        <div className="w-1/2 pr-4 ">
           {sectionsData.map((section, index) => (
             <div key={index} className="h-48 rounded-lg shadow-lg flex mb-4">
               {/* Part 1 (smaller width with image) */}
-              <div className="w-1/3 bg-blue-200 flex items-center rounded-2xl justify-center">
+              <div className="w-1/3 bg-blue-200 flex items-center rounded-2xl justify-center bg-white rounded-2xl">
                 <img
                   src={section.imageUrl}
                   alt={`Section ${index + 1}`}
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
-              <div className="w-2/3 bg-white-200 flex flex-col items-start justify-center">
+              <div className="w-2/3 bg-white-200 flex flex-col items-start justify-center bg-white rounded-2xl">
                 {/* Upper Row */}
                 <div className="flex w-full mb-4">
                   <div className="w-1/2 pr-2">
@@ -94,7 +94,7 @@ const TwoColumnLayout = () => {
           </div>
         </div> */}
 
-        <div className="w-1/2 pl-4">
+        <div className="w-1/2 pl-4 bg-white">
           {sectionsData2.map((section, index) => (
             <div key={index} className="rounded-lg h-144 shadow-lg mb-4">
               {/* Part 1 (smaller width with image) */}

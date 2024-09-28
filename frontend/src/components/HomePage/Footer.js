@@ -10,36 +10,36 @@ const Footer = () => {
           {/* Social Links: 2 rows with 5 icons each */}
           <div className="space-y-4">
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 FB
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 TW
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 IN
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 YT
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 LI
               </a>
             </div>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 SC
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 PT
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 WT
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 GP
               </a>
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 TK
               </a>
             </div>
@@ -51,27 +51,27 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Company</h3>
           <ul>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 About Us
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Contact Us
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Our Blogs
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Career With Us
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Payment Policy
               </a>
             </li>
@@ -83,27 +83,27 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Trips</h3>
           <ul>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Backpacking Trips
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Treks
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Weekend Getaways
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Biking Trips
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Upcoming Trips
               </a>
             </li>
@@ -115,27 +115,27 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Customized Tour</h3>
           <ul>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Domestic Tour Packages
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 International Getaways
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Corporate Tours
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Ladakh Trips
               </a>
             </li>
             <li className="mb-2">
-              <a href="#" className="hover:text-gray-400">
+              <a href="#" className="hover:text-gray-400 font-poppins">
                 Spiti Trips
               </a>
             </li>

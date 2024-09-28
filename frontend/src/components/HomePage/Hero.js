@@ -103,13 +103,6 @@ const Hero = () => {
 
       <div className="relative z-10 flex items-center justify-start p-6 lg:justify-start h-3/4 w-1/2">
         <div className="max-w-md lg:max-w-lg p-4">
-          {/* <h1 className="text-8xl font-bold text-white mb-4">Book Your <span>Trip to </span>  </h1> */}
-          {/* <h1 className="text-8xl font-bold text-white mb-4">
-            Book Your Trip to{" "}
-            <span className={slideOut ? "review-slide-out" : "review-slide-in"}>
-              {currentLocation}
-            </span>
-          </h1> */}
           <h1 className="text-8xl font-bold text-white mb-4 leading-none">
             <span>Book Your</span> <br />
             <span>

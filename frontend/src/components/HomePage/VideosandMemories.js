@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const videosandMemories = () => {
-  return (
-    <div>videosandMemories</div>
-  )
-}
+  return <div></div>;
+};
 
-export default videosandMemories
+export default videosandMemories;

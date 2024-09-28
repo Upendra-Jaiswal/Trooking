@@ -50,17 +50,17 @@ const HomeContainer = () => {
     }
   };
 
-  const verifyToken = () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      // Token is expired, handle re-authentication or token refresh
-      console.log("Token expired");
-      // e.g., redirect to login or refresh token
-    } else {
-      console.log("token not expired", token);
-      // Proceed with API request
-    }
-  };
+  // const verifyToken = () => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     // Token is expired, handle re-authentication or token refresh
+  //     console.log("Token expired");
+  //     // e.g., redirect to login or refresh token
+  //   } else {
+  //     console.log("token not expired", token);
+  //     // Proceed with API request
+  //   }
+  // };
 
   return (
     <>
@@ -70,12 +70,13 @@ const HomeContainer = () => {
         <TaxiBanner />
         <ImageSlider />
         <SliderTour />
-        <Blogs />
+
         <Testimonials />
         <WhyChooseus />
         <VideosandMemories />
-        <Recognition />
+        <Blogs />
         <FAQ />
+        <Recognition />
         <Newletter />
         <Footer />
       </div>

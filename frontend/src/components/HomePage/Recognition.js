@@ -6,7 +6,7 @@ import startup from "../../assets/Recognition-startupindia.png";
 
 const Recognition = () => {
   return (
-    <div className="p-6 flex flex-col items-center">
+    <div className="p-6 flex flex-col items-center mt-32">
       <div className="text-center">
         <h1 className="text-2xl font-bold">Recognitions</h1>
         <h2 className="text-lg mt-2">Recognitions By Govt.</h2>
