@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const crypto = require("crypto");
 const axios = require("axios");
 
-const authRoutes = require("./routes/AuthRoutes");
+const authRoutes = require("./routes/AuthRoutes"); //authroutes
 const userRoutes = require("./routes/UserRoutes");
 const tripBookingRoutes = require("./routes/tripBookingRoutes");
 // const user1Routes = require("./routes/user1Routes");
