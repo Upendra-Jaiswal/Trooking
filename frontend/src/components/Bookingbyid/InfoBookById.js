@@ -1,10 +1,45 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Payment from "./Payment";
 
-const BookingInfoComponent = () => {
+const InfoBookById = () => {
   const [openDay, setOpenDay] = useState(null); // Tracks the currently open day
   const amount = 1050;
+
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const location = useLocation();
+  const { trip } = location.state || {}; // Get the trip info from the passed state
+
+  // useEffect(() => {
+  //   const fetchTrips = async () => {
+  //     try {
+  //       const response = await fetch(`${backendUrl}/api/trips`, {
+  //         method: "GET",
+  //         credentials: "include", // This is crucial to send cookies
+  //       });
+  //       const data = await response.json();
+  //       if (data.success) {
+  //         setTrips(data.data);
+  //         console.log(data.data)
+  //       }
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching trips:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchTrips();
+  // }, []);
+
+  useEffect(() => {
+    console.log([trip], "data");
+  }, []);
+  // if (loading) {
+  //   return <div className="text-center text-lg font-semibold">Loading...</div>;
+  // }
 
   const toggleDay = (day) => {
     setOpenDay(openDay === day ? null : day); // Toggle open/close for the selected day
@@ -14,6 +49,11 @@ const BookingInfoComponent = () => {
     transform: openDay === day ? "rotate(180deg)" : "rotate(0)",
     transition: "transform 0.3s ease",
   });
+
+  // if (!trip) {
+  //   return <div>No trip information available.</div>; // Handle case where no trip is provided
+  // }
+
   return (
     <div className="flex min-h-screen ">
       {/* First Column - 70% height of the screen */}
@@ -24,7 +64,7 @@ const BookingInfoComponent = () => {
         <div className="h-20 mb-2 p-4 bg-white rounded-2xl flex">
           {/* First Column */}
           <div className="w-8/12">
-            <h3 className="text-lg font-bold">Chandranahan Lake Trek</h3>
+            <h3 className="text-lg font-bold"> name</h3>
             <p>(7095+ Reviews)</p>
           </div>
           {/* Second Column */}
@@ -369,4 +409,4 @@ const BookingInfoComponent = () => {
   );
 };
 
-export default BookingInfoComponent;
+export default InfoBookById;

@@ -2,18 +2,25 @@ const express = require("express");
 const connectDB = require("./config/db");
 const loadEnv = require("./config/env");
 const cookieParser = require("cookie-parser");
+const crypto = require("crypto");
+const axios = require("axios");
 
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/userRoutes");
-const user1Routes = require("./routes/user1Routes");
-const taxiBookingRoutes = require("./routes/taxiBookingRoutes");
-const authMiddleware = require("./middlewares/authMiddleware");
-const tripRoutes = require("./routes/tripRoutes");
-const { protect, admin, protected } = require("./middlewares/authMiddleware");
+const authRoutes = require("./routes/AuthRoutes");
+const userRoutes = require("./routes/UserRoutes");
+const tripBookingRoutes = require("./routes/tripBookingRoutes");
+// const user1Routes = require("./routes/user1Routes");
+const taxiBookingRoutes = require("./routes/TaxiBookingRoutes");
+const authMiddleware = require("./middlewares/AuthMiddleware");
+const tripRoutes = require("./routes/TripRoutes");
+// const bookingRoutes = require("./routes/bookingRoutes");
+const { protect, admin, protected } = require("./middlewares/AuthMiddleware");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3001;
 require("dotenv").config(); // Load environment variables
+
+let salt_key = "96434309-7796-489d-8924-ab56988a6076";
+let merchant_id = "PGTESTPAYUAT86";
 
 // Load environment variables
 loadEnv();
@@ -28,16 +35,6 @@ app.use(cookieParser());
 
 const allowedOrigins = process.env.ORIGIN;
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", allowedOrigins); // Replace '*' with your domain if needed
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
-
-//https://trooking.vercel.app/
-//origin: "http://localhost:3000",
-//  origin: allowedOrigins,
 const corsOptions = {
   origin: allowedOrigins,
   methods: ["POST", "GET"],
@@ -67,6 +64,8 @@ app.use("/api", userRoutes);
 app.use("/api", taxiBookingRoutes);
 
 app.use("/api", protected, tripRoutes);
+// app.use("/api", bookingRoutes);
+app.use("/api", tripBookingRoutes);
 //app.use("/api", userRoutes);
 //app.use("/api", authMiddleware, user1Routes);
 //app.use("/api", authMiddleware, userRoutes);
@@ -84,6 +83,104 @@ app.get("/set-cookie", (req, res) => {
 app.get("/get-cookie", (req, res) => {
   const cookieValue = req.cookies.jwt;
   res.send(`Cookie value: ${cookieValue}`);
+});
+
+// let salt_key = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399'
+// let merchant_id = 'PGTESTPAYUAT'
+
+app.get("/", (req, res) => {
+  res.send("server running!");
+});
+
+app.post("/order", async (req, res) => {
+  try {
+    let merchantTransactionId = req.body.transactionId;
+
+    const data = {
+      merchantId: merchant_id,
+      merchantTransactionId: merchantTransactionId,
+      name: req.body.name,
+      amount: req.body.amount * 100,
+      redirectUrl: `http://localhost:8000/status?id=${merchantTransactionId}`,
+      redirectMode: "POST",
+      mobileNumber: req.body.phone,
+      paymentInstrument: {
+        type: "PAY_PAGE",
+      },
+    };
+
+    const payload = JSON.stringify(data);
+    const payloadMain = Buffer.from(payload).toString("base64");
+    const keyIndex = 1;
+    const string = payloadMain + "/pg/v1/pay" + salt_key;
+    const sha256 = crypto.createHash("sha256").update(string).digest("hex");
+    const checksum = sha256 + "###" + keyIndex;
+
+    // const prod_URL = "https://api.phonepe.com/apis/hermes/pg/v1/pay"
+    const prod_URL =
+      "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+
+    const options = {
+      method: "POST",
+      url: prod_URL,
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        "X-VERIFY": checksum,
+      },
+      data: {
+        request: payloadMain,
+      },
+    };
+
+    await axios(options)
+      .then(function (response) {
+        console.log(response.data);
+        return res.json(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/status", async (req, res) => {
+  const merchantTransactionId = req.query.id;
+  const merchantId = merchant_id;
+
+  const keyIndex = 1;
+  const string =
+    `/pg/v1/status/${merchantId}/${merchantTransactionId}` + salt_key;
+  const sha256 = crypto.createHash("sha256").update(string).digest("hex");
+  const checksum = sha256 + "###" + keyIndex;
+
+  const options = {
+    method: "GET",
+    url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "X-VERIFY": checksum,
+      "X-MERCHANT-ID": `${merchantId}`,
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      if (response.data.success === true) {
+        const url = "http://localhost:5173/success";
+        return res.redirect(url);
+      } else {
+        const url = "http://localhost:5173/fail";
+        return res.redirect(url);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
 
 // Start the server

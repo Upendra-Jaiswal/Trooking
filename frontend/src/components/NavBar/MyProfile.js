@@ -1,15 +1,26 @@
-import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import Bookings from "./Bookings";
-import BookingCancellation from "./BookinCancellation";
+import BookingCancellation from "./BookingCancellation";
+
 import Admin from "./Admin";
 import TaxiShow from "../HomePage/TaxiShow";
+import { AuthContext } from "../../context/AuthContext"; // Adjust the path
+import React, { useContext, useState } from "react";
 
 const MyProfile = () => {
   const [activeSection, setActiveSection] = useState("Dashboard");
+  const {
+    isAuthenticated,
+    userName,
+    setIsAuthenticated,
+    setUserName,
+    userData,
+    isAdmin,
+    setIsAdmin,
+  } = useContext(AuthContext);
 
   const renderContent = () => {
     switch (activeSection) {
@@ -22,17 +33,20 @@ const MyProfile = () => {
       case "Booking Cancellation":
         return <BookingCancellation />;
       case "Admin":
-        return <Admin />;
+        return isAdmin ? (
+          <Admin />
+        ) : (
+          <div>You do not have access to this section.</div>
+        );
       case "TaxiBooking":
         return <TaxiShow />;
-
       default:
         return null;
     }
   };
 
   return (
-    <div className="p-4  bg-gray-400">
+    <div className="p-4 bg-gray-400">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
         {/* Left Column: Navigation */}
         <div className="bg-white p-4 rounded-2xl shadow col-span-3 h-screen">
@@ -49,28 +63,29 @@ const MyProfile = () => {
             {[
               "Dashboard",
               "Profile",
-              "Bookings",
+              isAdmin ? null : "Bookings",
               "Booking Cancellation",
-              "Admin",
+              isAdmin ? "Admin" : null, // Conditionally render Admin if isAdmin is true
               "TaxiBooking",
-            ].map((section) => (
-              <li key={section}>
-                <button
-                  onClick={() => setActiveSection(section)}
-                  className={`text-left w-full text-gray-600 hover:text-gray-900 ${
-                    activeSection === section ? "font-bold" : ""
-                  } p-2 rounded`}
-                >
-                  {section}
-                </button>
-              </li>
-            ))}
+            ]
+              .filter(Boolean) // Filter out null values
+              .map((section) => (
+                <li key={section}>
+                  <button
+                    onClick={() => setActiveSection(section)}
+                    className={`text-left w-full text-gray-600 hover:text-gray-900 ${
+                      activeSection === section ? "font-bold" : ""
+                    } p-2 rounded`}
+                  >
+                    {section}
+                  </button>
+                </li>
+              ))}
           </ul>
         </div>
 
         {/* Right Column: Content Display */}
         <div className="bg-white p-4 rounded-2xl shadow col-span-9">
-          {/* <h2 className="text-lg font-bold mb-4">{activeSection}</h2> */}
           {renderContent()}
         </div>
       </div>

@@ -49,6 +49,7 @@ const PrivateRoute = () => {
           credentials: "include",
         });
         if (response.ok) {
+          console.log(response);
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);

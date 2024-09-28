@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import GetAllBookings from "../Trips/GetAllBookings";
 
 const Admin = () => {
   return (
-    <div>Admin</div>
-  )
-}
+    <div>
+      <GetAllBookings />
+    </div>
+  );
+};
 
-export default Admin
+export default Admin;

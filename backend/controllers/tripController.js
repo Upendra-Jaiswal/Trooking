@@ -1,6 +1,6 @@
-const Trip = require("../models/tripModel");
-const Booking = require("../models/bookingModel");
-const User = require("../models/userModel");
+const Trip = require("../models/TripModel");
+
+const User = require("../models/UserModel");
 
 // Get all available trips
 const getAllTrips = async (req, res) => {
@@ -8,6 +8,7 @@ const getAllTrips = async (req, res) => {
     const trips = await Trip.find();
     res.status(200).json({ success: true, data: trips });
   } catch (error) {
+    console.error("Error fetching trips:", error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
@@ -15,57 +16,17 @@ const getAllTrips = async (req, res) => {
 // Add a new trip (admin functionality)
 const addTrip = async (req, res) => {
   try {
-    const { name, cost } = req.body;
-    const newTrip = new Trip({ name, cost });
+    const { name, price, duration, route } = req.body; // Adjusted to include duration and route
+    const newTrip = new Trip({ name, price, duration, route });
     await newTrip.save();
     res.status(201).json({ success: true, data: newTrip });
   } catch (error) {
+    console.error("Error adding trip:", error);
     res.status(400).json({ success: false, message: "Invalid data" });
   }
 };
 
-// // Book Trip Controller
-// const bookTrip = async (req, res) => {
-//   try {
-//     const { tripId } = req.body; // Extract tripId from request body
-//     const userId = req.user.id; // Assuming user ID is stored in req.user after authentication
-
-//     // Validate the trip existence
-//     const trip = await Trip.findById(tripId);
-//     if (!trip) {
-//       return res
-//         .status(404)
-//         .json({ success: false, message: "Trip not found" });
-//     }
-
-//     // Validate the user existence
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res
-//         .status(404)
-//         .json({ success: false, message: "User not found" });
-//     }
-
-//     // Create a new booking
-//     const newBooking = new Booking({
-//       user: userId,
-//       trip: tripId,
-//     });
-
-//     await newBooking.save(); // Save the booking to the database
-
-//     res.status(201).json({ success: true, data: newBooking });
-//   } catch (error) {
-//     res
-//       .status(400)
-//       .json({
-//         success: false,
-//         message: "Booking failed",
-//         error: error.message,
-//       });
-//   }
-// };
-
+// Book a trip
 const bookTrip = async (req, res) => {
   try {
     const { tripId } = req.body; // Extract tripId from request body
@@ -99,25 +60,17 @@ const bookTrip = async (req, res) => {
     }
 
     // Create a new booking
-    const newBooking = new Booking({
-      user: userId,
-      trip: tripId,
-    });
-
+    const newBooking = new Booking({ user: userId, trip: tripId });
     await newBooking.save(); // Save the booking to the database
 
     res.status(201).json({ success: true, data: newBooking });
   } catch (error) {
-    // Log the error for debugging purposes
     console.error("Booking error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Booking failed",
-      error: error.message, // Consider removing this in production
-    });
+    res.status(500).json({ success: false, message: "Booking failed" });
   }
 };
+
+// Get all bookings for a user
 const getUserBookings = async (req, res) => {
   try {
     const userId = req.user.id; // Assuming user ID is stored in req.user after authentication
@@ -135,10 +88,11 @@ const getUserBookings = async (req, res) => {
 
     // Format the response to include user name and trip name
     const formattedBookings = bookings.map((booking) => ({
-    //   bookingId: booking._id,
       userName: booking.user.name,
       tripName: booking.trip.name,
-      tripCost: booking.trip.cost, // Optionally include cost or other trip details
+      tripPrice: booking.trip.price, // Include trip price
+      duration: booking.trip.duration, // Include trip duration
+      route: booking.trip.route, // Include trip route
     }));
 
     res.status(200).json({ success: true, data: formattedBookings });

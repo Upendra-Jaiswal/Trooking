@@ -18,13 +18,6 @@ import TaxiBanner from "./TaxiBanner";
 
 const HomeContainer = () => {
   const [token, setToken] = useState(null);
-  // const logout = async () => {
-  //   // localStorage.removeItem("token");
-  //   await fetch("http://localhost:3001/api/logout");
-
-  //   // localStorage.getItem("token");
-  //   console.log("log out pressed");
-  // };
 
   const logout = async () => {
     try {
@@ -69,51 +62,9 @@ const HomeContainer = () => {
     }
   };
 
-  // useEffect(() => {
-  // Retrieve token from local storage or cookies on initial load
-  // const savedToken = localStorage.getItem("token");
-  // if (savedToken) {
-  //   setToken(savedToken);
-  //   // Optionally, fetch user data based on token
-  //   // fetchUserData(savedToken);
-  // }
-
-  //   const fetchUserData = async () => {
-  //     const token = localStorage.getItem("token");
-  //     try {
-  //       const response = await fetch("http://localhost:3001/api/getusers", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const userData = await response.json();
-  //       console.log(userData, "userdata"); // Will print user details
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, [token]);
-
   return (
     <>
-      {/* <div className="container mx-auto px-6 py-20 text-center">
-        <h1 className="text-5xl font-bold mb-4">Welcome to justwravel</h1>
-        <p className="text-lg mb-8">book your trips</p>
-        <a
-          href="/signup"
-          className="bg-white text-green-600 px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-200 transition"
-        >
-          Get Started for Free
-        </a>
-
-        <button onClick={logout}>logout here</button>
-        <button onClick={verifyToken}>verify token exists</button>
-      </div> */}
       <div className=" bg-gray-200">
-     
-
         <Hero />
         <Trips />
         <TaxiBanner />

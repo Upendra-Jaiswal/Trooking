@@ -16,9 +16,16 @@ import MyBookings from "./components/NavBar/MyBookings";
 import Payment from "./components/Bookingbyid/Payment";
 import TaxiBooking from "./components/HomePage/TaxiBooking";
 import Navbar from "./components/NavBar/NavBar";
-import BookingForm from "./components/Trips/BookingForm";
+import BookingForm from "./components/Trips/GetAllBookings";
 import TripList from "./components/Trips/TripList";
 import UserBookings from "./components/NavBar/UserBokings";
+import Bookings from "./components/NavBar/Bookings";
+import AllBookings from "./components/Trips/AllBookings";
+import CreateBooking from "./components/Trips/CreateBooking";
+import FetchTrip from "./components/Trips/FetchTrip";
+import GetAllBookings from "./components/Trips/GetAllBookings";
+import GetUserBookings from "./components/Trips/GetUserBookings";
+import Finalbooking from "./components/Bookingbyid/Finalbooking";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -72,7 +79,14 @@ function App() {
 
             <Route path="/bookingform" element={<BookingForm />} />
             <Route path="/triplist" element={<TripList />} />
-            <Route path="/getuserbookings" element={<UserBookings />} />
+            {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
+            <Route path="/bookings" element={<Bookings />} />
+            <Route path="/allbookings" element={<AllBookings />} />
+            <Route path="/createbooking" element={<CreateBooking />} />
+            <Route path="/fetchtrip" element={<FetchTrip />} />
+            <Route path="/getallbookings" element={<GetAllBookings />} />
+            <Route path="/getuserbookings" element={<GetUserBookings />} />
+            <Route path="/finalbooking" element={<Finalbooking />} />
           </Route>
 
           {/* <Route

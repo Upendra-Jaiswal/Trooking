@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("../models/UserModel");
 
 const getusers = async (req, res) => {
   try {
@@ -9,18 +9,6 @@ const getusers = async (req, res) => {
   }
 };
 
-const getuser1 = async (req, res) => {
-  try {
-    //const {email} = req.body
-    const user1 = await User.find();
-    return res.send(user1);
-  } catch (e) {
-    res.status(500).send({ message: e.message });
-  }
-};
 
-const checktoken = async (req, res) => {
-  //res.send({"message:req.cookie"});
-};
 
-module.exports = { getusers, getuser1, checktoken };
+module.exports = { getusers, };

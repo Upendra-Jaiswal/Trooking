@@ -4,7 +4,7 @@ const router = express.Router();
 const {
   taxibooking,
   gettaxibooking,
-} = require("../controllers/taxiBookingController");
+} = require("../controllers/TaxiBookingController");
 
 router.post("/taxibooking", taxibooking);
 
