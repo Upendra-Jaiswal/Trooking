@@ -66,7 +66,8 @@ const MyProfile = () => {
               isAdmin ? null : "Bookings",
               "Booking Cancellation",
               isAdmin ? "Admin" : null, // Conditionally render Admin if isAdmin is true
-              "TaxiBooking",
+
+              isAdmin ? "TaxiBooking" : null,
             ]
               .filter(Boolean) // Filter out null values
               .map((section) => (

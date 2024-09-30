@@ -44,7 +44,7 @@ const GetUserBookings = () => {
             <li key={booking._id} className="border p-4 rounded-lg shadow">
               <h2 className="text-xl font-semibold">{booking.trip.name}</h2>
               <p>Number of Passengers: {booking.numberOfPassengers}</p>
-              <p>Total Price: ${booking.totalPrice.toFixed(2)}</p>
+              <p>Total Price: ₹{booking.totalPrice.toFixed(2)}</p>
               <p>
                 Booking Date: {new Date(booking.createdAt).toLocaleDateString()}
               </p>

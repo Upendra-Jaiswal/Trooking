@@ -11,14 +11,11 @@ const GetAllBookings = () => {
     const fetchBookings = async () => {
       try {
         // Make a request to the API endpoint to fetch bookings
-        const response = await axios.get(
-          `${backendUrl}/api/getallbookings`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`${backendUrl}/api/getallbookings`, {
+          withCredentials: true,
+        });
         setBookings(response.data.data);
-        console.log(response.data.data)
+        console.log(response.data.data);
       } catch (err) {
         console.error("Error fetching bookings:", err);
         setError("Failed to fetch bookings. Please try again later.");
@@ -56,7 +53,7 @@ const GetAllBookings = () => {
               <td className="py-2 px-4 border-b">
                 {booking.numberOfPassengers}
               </td>
-              <td className="py-2 px-4 border-b">${booking.totalPrice}</td>
+              <td className="py-2 px-4 border-b">₹{booking.totalPrice}</td>
 
               <td className="py-2 px-4 border-b">
                 {new Date(booking.createdAt).toLocaleDateString()}

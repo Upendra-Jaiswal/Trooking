@@ -15,6 +15,9 @@ import BookingbyId from "../Bookingbyid/BookingbyId";
 import InfoBookById from "../Bookingbyid/InfoBookById";
 import NavBar from "../NavBar/NavBar";
 import TaxiBanner from "./TaxiBanner";
+import Chatgptvideospage from "./Chatgptpage";
+import Swiper from "./Swiper";
+import SwiperGrid from "./SwiperGrid";
 
 const HomeContainer = () => {
   const [token, setToken] = useState(null);
@@ -73,7 +76,10 @@ const HomeContainer = () => {
 
         <Testimonials />
         <WhyChooseus />
-        <VideosandMemories />
+        {/* <VideosandMemories /> */}
+        <Swiper />
+        <SwiperGrid />
+        {/* <Chatgptvideospage /> */}
         <Blogs />
         <FAQ />
         <Recognition />

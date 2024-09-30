@@ -39,8 +39,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-100">
-      <div className="w-full max-w-md p-8 bg-gray-800 shadow-md rounded-lg">
+    <div className="flex items-center justify-center min-h-screen bg-white text-black">
+      <div className="w-full max-w-md p-8 bg-white-800 shadow-md rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Sign In</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
