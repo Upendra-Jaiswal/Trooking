@@ -6,7 +6,7 @@ const {
   getBookingById,
   updateBooking,
   deleteBooking,
-} = require("../controllers/tripBookingController");
+} = require("../controllers/TripBookingController");
 // const { protect } = require("../middleware/authMiddleware"); // Assuming you have a middleware for protecting routes
 
 const router = express.Router();

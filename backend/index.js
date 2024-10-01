@@ -7,7 +7,7 @@ const axios = require("axios");
 
 const authRoutes = require("./routes/authRoutes"); //authroutes
 const userRoutes = require("./routes/userRoutes");
-const tripBookingRoutes = require("./routes/tripBookingRoutes");
+const tripBookingRoutes = require("./routes/TripBookingRoutes");
 // const user1Routes = require("./routes/user1Routes");
 const taxiBookingRoutes = require("./routes/taxiBookingRoutes");
 const authMiddleware = require("./middlewares/authMiddleware");

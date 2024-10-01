@@ -1,4 +1,4 @@
-const TaxiBooking = require("../models/taxiBooking");
+const TaxiBooking = require("../models/TaxiBooking");
 
 // POST route to create a new booking
 const taxibooking = async (req, res) => {
@@ -11,7 +11,7 @@ const taxibooking = async (req, res) => {
       email: req.body.email,
       phone: req.body.phone,
       travelFrom: req.body.travelFrom,
-      travelTo: req.body.travelTo,  // Added Travel To field
+      travelTo: req.body.travelTo, // Added Travel To field
     });
 
     // Save booking to MongoDB
