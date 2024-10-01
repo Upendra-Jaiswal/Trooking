@@ -28,17 +28,13 @@ import "./swiper.css";
 // import required modules
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 
-export default function App() {
+export default function GridSwiperTripLower() {
   return (
-    <div className="bg-white">
-      <div className="bg-white ml-11 font-2xl">
-        <h1>
-          <span className="font-poppins"> BackPacking Tour </span>
-        </h1>
-      </div>
-      <div className="mt-5 p-11 bg-white">
+    <div className="">
+      <div className="font-2xl"></div>
+      <div className="mt-1 p-1 ">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={2}
           spaceBetween={30}
           freeMode={true}
           pagination={{
@@ -53,33 +49,16 @@ export default function App() {
           className="mySwiper"
         >
           <SwiperSlide className="rounded-2xl">
-            <img src={Kedarnatha} alt="kedarnath" className="rounded-2xl" />
+            <img src={img05} alt="kedarnath" className="rounded-2xl" />
           </SwiperSlide>
           <SwiperSlide className="rounded-2xl">
-            <img src={Bramhatal} alt="bramhatal" className="rounded-2xl" />
+            <img src={img06} alt="bramhatal" className="rounded-2xl" />
           </SwiperSlide>
           <SwiperSlide className="rounded-2xl">
-            <img
-              src={ChopaTungnath}
-              alt="chopatunganath"
-              className="rounded-2xl"
-            />
+            <img src={img07} alt="chopatunganath" className="rounded-2xl" />
           </SwiperSlide>
           <SwiperSlide className="rounded-2xl">
-            <img src={DayraBugyal} alt="dayrabugyal" className="rounded-2xl" />
-          </SwiperSlide>
-          <SwiperSlide className="rounded-2xl">
-            <img
-              src={GulabiKantha}
-              alt="gulabikantha"
-              className="rounded-2xl"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="rounded-2xl">
-            <img src={Kunwaripass} alt="kunwaripass" className="rounded-2xl" />
-          </SwiperSlide>
-          <SwiperSlide className="rounded-2xl">
-            <img src={NagTibba} alt="nagtibba" className="rounded-2xl" />
+            <img src={img01} alt="dayrabugyal" className="rounded-2xl" />
           </SwiperSlide>
         </Swiper>
       </div>

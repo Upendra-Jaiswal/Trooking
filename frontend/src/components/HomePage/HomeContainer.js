@@ -71,14 +71,14 @@ const HomeContainer = () => {
         <Hero />
         <Trips />
         <TaxiBanner />
-        <ImageSlider />
-        <SliderTour />
+        <Swiper />
+        {/* <ImageSlider /> */}
+        {/* <SliderTour /> */}
 
         <Testimonials />
         <WhyChooseus />
         {/* <VideosandMemories /> */}
-        <Swiper />
-        <SwiperGrid />
+
         {/* <Chatgptvideospage /> */}
         <Blogs />
         <FAQ />
