@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const tripController = require("../controllers/TripController");
+const tripController = require("../controllers/tripController");
 
 const {
   getAllTrips,
   addTrip,
   bookTrip,
   getUserBookings,
-} = require("../controllers/TripController");
+} = require("../controllers/tripController");
 
 // Route to get all trips
 router.get("/trips", getAllTrips);
