@@ -15,7 +15,7 @@ import GridSwiperTripLower from "./GridSwiperTripLower";
 
 const TripSelection = () => {
   const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedTrips, setSelectedTrips] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate(); // Hook for navigation
@@ -98,7 +98,8 @@ const TripSelection = () => {
         </div>
 
         <div class="col-span-3 grid grid-cols-1 lg:gap-[1rem] 2xl:gap-[1.875rem]">
-          {loading ? (
+         {
+          loading ? (
             <p>Loading trips...</p>
           ) : (
             <div>
