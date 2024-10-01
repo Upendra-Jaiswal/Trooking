@@ -1,6 +1,6 @@
-const TripBooking = require("../models/TripBooking");
-const Trip = require("../models/TripModel");
-const User = require("../models/UserModel");
+const TripBooking = require("../models/tripBooking");
+const Trip = require("../models/tripModel");
+const User = require("../models/userModel");
 
 // Create a new trip booking
 const createBooking = async (req, res) => {

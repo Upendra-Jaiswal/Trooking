@@ -1,7 +1,7 @@
 // middleware/authMiddleware.js
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const User = require("../models/UserModel");
+const User = require("../models/userModel");
 
 dotenv.config();
 

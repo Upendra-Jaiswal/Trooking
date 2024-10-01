@@ -1,4 +1,4 @@
-const User = require("../models/UserModel"); // Import User model
+const User = require("../models/userModel"); // Import User model
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config(); // Load environment variables

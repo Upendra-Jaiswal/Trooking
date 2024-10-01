@@ -1,4 +1,4 @@
-const TaxiBooking = require("../models/TaxiBooking");
+const TaxiBooking = require("../models/taxiBooking");
 
 // POST route to create a new booking
 const taxibooking = async (req, res) => {

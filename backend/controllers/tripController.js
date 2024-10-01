@@ -1,6 +1,6 @@
-const Trip = require("../models/TripModel");
+const Trip = require("../models/tripModel");
 
-const User = require("../models/UserModel");
+const User = require("../models/userModel");
 
 // Get all available trips
 const getAllTrips = async (req, res) => {
