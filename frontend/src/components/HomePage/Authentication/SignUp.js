@@ -236,7 +236,7 @@ const SignUp = () => {
               required
             />
           </div>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <input
               type="checkbox"
               id="isAdmin"
@@ -247,7 +247,7 @@ const SignUp = () => {
             <label htmlFor="isAdmin" className="block text-sm font-medium">
               Admin
             </label>
-          </div>
+          </div> */}
           <button
             type="submit"
             className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"

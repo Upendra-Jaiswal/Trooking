@@ -58,38 +58,41 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Navbar />
+        <Navbar className="mb-36" />
 
         {/* <Navbar isAuthenticated={isAuthenticated} userName={userName} /> */}
-        <Routes>
-          {/* <PrivateRoute path="/profile" component={Profile} /> */}
+        <div style={{ marginTop: "6rem" }}>
+          {" "}
+          {/* Adjust based on your Navbar height */}
+          <Routes>
+            {/* <PrivateRoute path="/profile" component={Profile} /> */}
 
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={<HomeContainer />} />
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/my-profile" element={<MyProfile />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/" element={<HomeContainer />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/my-profile" element={<MyProfile />} />
 
-            <Route path="/bookingbyid" element={<BookingbyId />} />
+              <Route path="/bookingbyid" element={<BookingbyId />} />
 
-            <Route path="/mybookings" element={<MyBookings />} />
+              <Route path="/mybookings" element={<MyBookings />} />
 
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/taxi-booking" element={<TaxiBooking />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/taxi-booking" element={<TaxiBooking />} />
 
-            <Route path="/bookingform" element={<BookingForm />} />
-            <Route path="/triplist" element={<TripList />} />
-            {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
-            <Route path="/bookings" element={<Bookings />} />
-            <Route path="/allbookings" element={<AllBookings />} />
-            <Route path="/createbooking" element={<CreateBooking />} />
-            <Route path="/fetchtrip" element={<FetchTrip />} />
-            <Route path="/getallbookings" element={<GetAllBookings />} />
-            <Route path="/getuserbookings" element={<GetUserBookings />} />
-            <Route path="/finalbooking" element={<Finalbooking />} />
-          </Route>
+              <Route path="/bookingform" element={<BookingForm />} />
+              <Route path="/triplist" element={<TripList />} />
+              {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
+              <Route path="/bookings" element={<Bookings />} />
+              <Route path="/allbookings" element={<AllBookings />} />
+              <Route path="/createbooking" element={<CreateBooking />} />
+              <Route path="/fetchtrip" element={<FetchTrip />} />
+              <Route path="/getallbookings" element={<GetAllBookings />} />
+              <Route path="/getuserbookings" element={<GetUserBookings />} />
+              <Route path="/finalbooking" element={<Finalbooking />} />
+            </Route>
 
-          {/* <Route
+            {/* <Route
             path="/my-profile"
             element={
               <PrivateRoute>
@@ -97,12 +100,12 @@ function App() {
               </PrivateRoute>
             }
           /> */}
-          {/* 
+            {/* 
           <Route
             path="/my-profile"
             element={<PrivateRoute element={<MyProfile />} />}
           /> */}
-          {/* <Route
+            {/* <Route
             path="/bookingbyid"
             element={<PrivateRoute element={<BookingbyId />} />}
           />
@@ -115,16 +118,17 @@ function App() {
             element={<PrivateRoute element={<Payment />} />}
           /> */}
 
-          {/* <Route path="/my-profile" element={<MyProfile />} />
+            {/* <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/bookingbyid" element={<BookingbyId />} />
           <Route path="/mybookings" element={<MyBookings />} />
           <Route path="/payment" element={<Payments />} /> */}
 
-          {/* <Route
+            {/* <Route
             path="/"
             element={<PrivateRoute element={<HomeContainer />} />}
           /> */}
-        </Routes>
+          </Routes>
+        </div>
       </Router>
     </AuthProvider>
   );

@@ -46,7 +46,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-400">
+    <div className="p-4 bg-gray-400 mt-9">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
         {/* Left Column: Navigation */}
         <div className="bg-white p-4 rounded-2xl shadow col-span-3 h-screen">

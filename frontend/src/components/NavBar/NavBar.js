@@ -83,7 +83,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div class="fixed left-0 top-0 z-30 hidden w-full items-center bg-white shadow-md h-[72px] lg:flex lg:h-[4rem] 2xl:h-[5.625rem]">
+    <div class="fixed left-0 top-0 z-30 hidden w-full items-center bg-white shadow-md h-[72px] lg:flex lg:h-[4rem] 2xl:h-[5.625rem] mb-9">
       <div class="container flex items-center lg:gap-[1.5rem] md:gap-[1.0rem] 2xl:gap-[1.875rem]">
         {/* Brand Section */}
         <div className="flex items-center">
@@ -127,7 +127,7 @@ const NavBar = () => {
           {/* More Dropdown */}
           <div className="relative" ref={moreRef}>
             <button
-                className="2xl:text-p-md font-normal font-poppins"
+              className="2xl:text-p-md font-normal font-poppins"
               onClick={toggleMoreDropdown}
             >
               More

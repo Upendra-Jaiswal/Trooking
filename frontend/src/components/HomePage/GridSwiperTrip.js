@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -17,7 +17,7 @@ import img04 from "../../assets/tripsimages/IMG_5857.JPG";
 import img05 from "../../assets/tripsimages/IMG_5858.JPG";
 import img06 from "../../assets/tripsimages/IMG_5859.JPG";
 import img07 from "../../assets/tripsimages/IMG_5860.JPG";
-
+import { useNavigate } from "react-router-dom";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -29,6 +29,36 @@ import "./swiper.css";
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 
 export default function GridSwiperTrip() {
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const navigate = useNavigate(); // Hook for navigation
+  // Fetch trips data from the API
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/trips`, {
+          method: "GET",
+          credentials: "include", // This is crucial to send cookies
+        });
+        const data = await response.json();
+        if (data.success) {
+          setTrips(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching trip data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrips();
+  }, [backendUrl]);
+
+  const handleBookClick = (trip) => {
+    navigate("/bookingbyid", { state: { trip } }); // Pass the selected trip as state
+  };
+
   return (
     <div className="">
       <div className="font-2xl"></div>
@@ -49,16 +79,36 @@ export default function GridSwiperTrip() {
           className="mySwiper"
         >
           <SwiperSlide className="rounded-2xl">
-            <img src={img01} alt="kedarnath" className="rounded-2xl" />
+            <img
+              src={img01}
+              alt="kedarnath"
+              className="rounded-2xl"
+              onClick={() => handleBookClick(trips[0])}
+            />
           </SwiperSlide>
           <SwiperSlide className="rounded-2xl">
-            <img src={img02} alt="bramhatal" className="rounded-2xl" />
+            <img
+              src={img02}
+              alt="bramhatal"
+              className="rounded-2xl"
+              onClick={() => handleBookClick(trips[1])}
+            />
           </SwiperSlide>
           <SwiperSlide className="rounded-2xl">
-            <img src={img03} alt="chopatunganath" className="rounded-2xl" />
+            <img
+              src={img03}
+              alt="chopatunganath"
+              className="rounded-2xl"
+              onClick={() => handleBookClick(trips[2])}
+            />
           </SwiperSlide>
           <SwiperSlide className="rounded-2xl">
-            <img src={img04} alt="dayrabugyal" className="rounded-2xl" />
+            <img
+              src={img04}
+              alt="dayrabugyal"
+              className="rounded-2xl"
+              onClick={() => handleBookClick(trips[3])}
+            />
           </SwiperSlide>
         </Swiper>
       </div>
