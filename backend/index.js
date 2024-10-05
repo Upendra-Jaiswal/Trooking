@@ -63,7 +63,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", taxiBookingRoutes);
 
-app.use("/api", protected, tripRoutes);
+app.use("/api",  tripRoutes);
 // app.use("/api", bookingRoutes);
 app.use("/api", tripBookingRoutes);
 //app.use("/api", userRoutes);

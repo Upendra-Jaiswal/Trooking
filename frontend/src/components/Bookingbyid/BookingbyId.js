@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import InfoBookById from "./InfoBookById";
+
 import bookbyidimgbiggest from "../../assets/bookbyidimgbiggest.jpg";
 import bookbyidimgbig from "../../assets/bookbyidimgbig.jpg";
 import bookbyidimgsmall11 from "../../assets/bookbyidimgsmall11.jpg";
@@ -12,7 +12,8 @@ import user4 from "../../assets/bookbyidimgbig.jpg";
 import "./MyComponent.css";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import Payment from "./Payment";
+
+import Footer from "../HomePage/Footer";
 const reviewsData = [
   {
     reviewText:
@@ -551,6 +552,7 @@ const MyComponent = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

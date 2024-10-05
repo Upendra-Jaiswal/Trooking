@@ -71,11 +71,10 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/" element={<HomeContainer />} />
+            <Route path="/bookingbyid" element={<BookingbyId />} />
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/my-profile" element={<MyProfile />} />
               <Route path="/" element={<NavBarLogin className="mb-36" />} />
-
-              <Route path="/bookingbyid" element={<BookingbyId />} />
 
               <Route path="/mybookings" element={<MyBookings />} />
 
@@ -94,41 +93,7 @@ function App() {
               <Route path="/finalbooking" element={<Finalbooking />} />
             </Route>
 
-            {/* <Route
-            path="/my-profile"
-            element={
-              <PrivateRoute>
-                <MyProfile />
-              </PrivateRoute>
-            }
-          /> */}
-            {/* 
-          <Route
-            path="/my-profile"
-            element={<PrivateRoute element={<MyProfile />} />}
-          /> */}
-            {/* <Route
-            path="/bookingbyid"
-            element={<PrivateRoute element={<BookingbyId />} />}
-          />
-          <Route
-            path="/mybookings"
-            element={<PrivateRoute element={<MyBookings />} />}
-          />
-          <Route
-            path="/payment"
-            element={<PrivateRoute element={<Payment />} />}
-          /> */}
-
-            {/* <Route path="/my-profile" element={<MyProfile />} />
-          <Route path="/bookingbyid" element={<BookingbyId />} />
-          <Route path="/mybookings" element={<MyBookings />} />
-          <Route path="/payment" element={<Payments />} /> */}
-
-            {/* <Route
-            path="/"
-            element={<PrivateRoute element={<HomeContainer />} />}
-          /> */}
+          
           </Routes>
         </div>
       </Router>
