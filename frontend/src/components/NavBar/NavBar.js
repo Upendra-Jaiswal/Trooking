@@ -90,11 +90,15 @@ const NavBar = () => {
         {/* Brand Section */}
         <div className="flex items-center">
           {" "}
-          <img src={BrandImage} alt="Logo" className="h-10 w-10 rounded-full" />
+          <img
+            src={BrandImage}
+            alt="Logo"
+            className="h-10 w-10 ml-20 rounded-full"
+          />
           <Link to="/">
             {" "}
             <span className="ml-2 text-xl font-bold text-gray-800">
-              Trippy India
+              Trooking
             </span>
           </Link>
         </div>

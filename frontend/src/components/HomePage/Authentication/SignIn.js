@@ -39,9 +39,15 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white text-black">
-      <div className="w-full max-w-md p-8 bg-white-800 shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-800 text-gray-100">
+      <div className="w-full max-w-md p-8 bg-white-800 shadow-xl rounded-lg">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold mb-4 m-4">Sign In</h2>
+          <span className="text-sm bg-green-200 p-4 rounded-2xl text-black">
+            <Link to="/">Homepage</Link>
+          </span>
+        </div>
+
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
