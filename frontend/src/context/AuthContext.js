@@ -1,5 +1,3 @@
-
-
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -11,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userData, setUserData] = useState("");
-
 
   useEffect(() => {
     // Simulating an authentication check
@@ -45,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     checkAuth();
-  }, [userName]);
+  }, [userName, isAuthenticated]);
 
   return (
     <AuthContext.Provider

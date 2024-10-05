@@ -1,52 +1,40 @@
 import React from "react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer className="bg-white text-black py-10">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        {/* Column 1: JustWravel with Social Links */}
         <div>
-          <h3 className="text-lg font-bold mb-4">JustWravel</h3>
-          {/* Social Links: 2 rows with 5 icons each */}
+          <h3 className="text-lg font-bold mb-4">Trooking</h3>
+
           <div className="space-y-4">
             <div className="flex space-x-4">
               <a href="#" className="hover:text-gray-400 font-poppins">
-                FB
+                <FaFacebookF />
               </a>
               <a href="#" className="hover:text-gray-400 font-poppins">
-                TW
+                <FaTwitter />
               </a>
               <a href="#" className="hover:text-gray-400 font-poppins">
-                IN
+                <FaInstagram />
               </a>
               <a href="#" className="hover:text-gray-400 font-poppins">
-                YT
+                <FaYoutube />
               </a>
               <a href="#" className="hover:text-gray-400 font-poppins">
-                LI
-              </a>
-            </div>
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-400 font-poppins">
-                SC
-              </a>
-              <a href="#" className="hover:text-gray-400 font-poppins">
-                PT
-              </a>
-              <a href="#" className="hover:text-gray-400 font-poppins">
-                WT
-              </a>
-              <a href="#" className="hover:text-gray-400 font-poppins">
-                GP
-              </a>
-              <a href="#" className="hover:text-gray-400 font-poppins">
-                TK
+                <FaLinkedinIn />
               </a>
             </div>
           </div>
         </div>
 
-        {/* Column 2: Company Information */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Company</h3>
           <ul>
@@ -154,7 +142,7 @@ const Footer = () => {
 
       <div className="container mx-auto text-center mt-10">
         <p className="text-gray-500">
-          &copy; {new Date().getFullYear()} JustWravel. All rights reserved.
+          &copy; {new Date().getFullYear()} Trooking. All rights reserved.
         </p>
       </div>
     </footer>

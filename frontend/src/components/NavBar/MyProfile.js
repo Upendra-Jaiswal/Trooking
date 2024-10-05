@@ -6,7 +6,7 @@ import Bookings from "./Bookings";
 import BookingCancellation from "./BookingCancellation";
 
 import Admin from "./Admin";
-import TaxiShow from "../HomePage/TaxiShow";
+import TaxiShow from "../MyProfile/TaxiShow";
 import { AuthContext } from "../../context/AuthContext"; // Adjust the path
 import React, { useContext, useState } from "react";
 

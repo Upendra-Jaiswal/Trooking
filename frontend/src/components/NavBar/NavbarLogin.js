@@ -5,7 +5,7 @@ import BrandImage from "../../assets/biketrip.jpeg";
 import { AuthContext } from "../../context/AuthContext"; // Adjust the path
 import axios from "axios";
 
-const NavBar = () => {
+const NavBarLogin = () => {
   const {
     isAuthenticated,
     userName,
@@ -46,6 +46,15 @@ const NavBar = () => {
   };
 
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("User authenticated, updating UI.");
+      setNewData(isAuthenticated);
+    } else {
+      console.log("User not authenticated, updating UI.");
+    }
+  }, [isAuthenticated, newdata]);
 
   const logout = async () => {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -219,62 +228,47 @@ const NavBar = () => {
             <div class="trasnition-all duration-300 ease-out "></div>
           </div>
           <div className="hidden md:flex items-center">
-            {isAuthenticated ? (
-              <div className="relative flex" ref={profileRef}>
-                <span className="text-gray-700 mr-2">{userName}</span>
-                <img
-                  src={ProfileImage}
-                  alt="Profile"
-                  className="h-10 w-10 rounded-full cursor-pointer"
-                  onClick={toggleProfileDropdown}
-                />
-                {isProfileOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50">
-                    <Link
-                      to="/my-profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={closeDropdown}
-                    >
-                      My Profile
-                    </Link>
-                    <a
-                      href="#settings"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={closeDropdown}
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#notifications"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={closeDropdown}
-                    >
-                      Notifications
-                    </a>
-                    <a
-                      href="#logout"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={logout}
-                    >
-                      Logout
-                    </a>
-                  </div>
-                )}
-              </div>
-            ) : (
-              // <button className="bg-blue-400 p-2 rounded-lg">
-              //   <Link to="/signin">LogIn</Link>
-              // </button>
-
-              <div>
-                <Link
-                  to="/signin"
-                  className="bg-blue-600 px-[26px] py-[12px]  text-white rounded-2xl w-[94px] h-[43px]"
-                >
-                  LogIn
-                </Link>
-              </div>
-            )}
+            <div className="relative flex" ref={profileRef}>
+              <span className="text-gray-700 mr-2">{userName}</span>
+              <img
+                src={ProfileImage}
+                alt="Profile"
+                className="h-10 w-10 rounded-full cursor-pointer"
+                onClick={toggleProfileDropdown}
+              />
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50">
+                  <Link
+                    to="/my-profile"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    My Profile
+                  </Link>
+                  <a
+                    href="#settings"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    Settings
+                  </a>
+                  <a
+                    href="#notifications"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    Notifications
+                  </a>
+                  <a
+                    href="#logout"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    onClick={logout}
+                  >
+                    Logout
+                  </a>
+                </div>
+              )}{" "}
+            </div>
           </div>
         </div>
 
@@ -305,4 +299,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBarLogin;

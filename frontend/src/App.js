@@ -14,7 +14,7 @@ import MyProfile from "./components/NavBar/MyProfile";
 import BookingbyId from "./components/Bookingbyid/BookingbyId";
 import MyBookings from "./components/NavBar/MyBookings";
 import Payment from "./components/Bookingbyid/Payment";
-import TaxiBooking from "./components/HomePage/TaxiBooking";
+import TaxiBooking from "./components/MyProfile/TaxiBooking";
 import Navbar from "./components/NavBar/NavBar";
 import BookingForm from "./components/Trips/GetAllBookings";
 import TripList from "./components/Trips/TripList";
@@ -26,6 +26,7 @@ import FetchTrip from "./components/Trips/FetchTrip";
 import GetAllBookings from "./components/Trips/GetAllBookings";
 import GetUserBookings from "./components/Trips/GetUserBookings";
 import Finalbooking from "./components/Bookingbyid/Finalbooking";
+import NavBarLogin from "./components/NavBar/NavbarLogin";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -72,6 +73,7 @@ function App() {
             <Route path="/" element={<HomeContainer />} />
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/my-profile" element={<MyProfile />} />
+              <Route path="/" element={<NavBarLogin className="mb-36" />} />
 
               <Route path="/bookingbyid" element={<BookingbyId />} />
 
