@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect,useContext } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { TripContext } from "../../context/TripContext";
 
 import Bramhatal from "../../assets/verticalslider/Brahmtal.jpg";
 import ChopaTungnath from "../../assets/verticalslider/Chopta Tungnath.jpg";
@@ -29,35 +30,14 @@ import "./swiper.css";
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 
 export default function GridSwiperTripLower() {
-  const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate(); // Hook for navigation
-  // Fetch trips data from the API
-  useEffect(() => {
-    const fetchTrips = async () => {
-      try {
-        const response = await fetch(`${backendUrl}/api/trips`, {
-          method: "GET",
-          credentials: "include", // This is crucial to send cookies
-        });
-        const data = await response.json();
-        if (data.success) {
-          setTrips(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching trip data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchTrips();
-  }, [backendUrl]);
+  const { trips, loading } = useContext(TripContext);
 
   const handleBookClick = (trip) => {
     navigate("/bookingbyid", { state: { trip } }); // Pass the selected trip as state
   };
+
   return (
     <div className="">
       <div className="font-2xl"></div>

@@ -9,6 +9,7 @@ import {
 import SignUp from "./components/HomePage/Authentication/SignUp";
 import SignIn from "./components/HomePage/Authentication/SignIn";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import { TripProvider } from "./context/TripContext";
 import PrivateRoute from "./PrivateRoute";
 import MyProfile from "./components/NavBar/MyProfile";
 import BookingbyId from "./components/Bookingbyid/BookingbyId";
@@ -58,45 +59,45 @@ function App() {
 
   return (
     <AuthProvider>
-      <Router>
-        <Navbar className="mb-36" />
+      <TripProvider>
+        <Router>
+          <Navbar className="mb-36" />
 
-        {/* <Navbar isAuthenticated={isAuthenticated} userName={userName} /> */}
-        <div style={{ marginTop: "6rem" }}>
-          {" "}
-          {/* Adjust based on your Navbar height */}
-          <Routes>
-            {/* <PrivateRoute path="/profile" component={Profile} /> */}
+          {/* <Navbar isAuthenticated={isAuthenticated} userName={userName} /> */}
+          <div style={{ marginTop: "6rem" }}>
+            {" "}
+            {/* Adjust based on your Navbar height */}
+            <Routes>
+              {/* <PrivateRoute path="/profile" component={Profile} /> */}
 
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/" element={<HomeContainer />} />
-            <Route path="/bookingbyid" element={<BookingbyId />} />
-            <Route path="/" element={<PrivateRoute />}>
-              <Route path="/my-profile" element={<MyProfile />} />
-              <Route path="/" element={<NavBarLogin className="mb-36" />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/" element={<HomeContainer />} />
+              <Route path="/bookingbyid" element={<BookingbyId />} />
+              <Route path="/" element={<PrivateRoute />}>
+                <Route path="/my-profile" element={<MyProfile />} />
+                <Route path="/" element={<NavBarLogin className="mb-36" />} />
 
-              <Route path="/mybookings" element={<MyBookings />} />
+                <Route path="/mybookings" element={<MyBookings />} />
 
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/taxi-booking" element={<TaxiBooking />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/taxi-booking" element={<TaxiBooking />} />
 
-              <Route path="/bookingform" element={<BookingForm />} />
-              <Route path="/triplist" element={<TripList />} />
-              {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
-              <Route path="/bookings" element={<Bookings />} />
-              <Route path="/allbookings" element={<AllBookings />} />
-              <Route path="/createbooking" element={<CreateBooking />} />
-              <Route path="/fetchtrip" element={<FetchTrip />} />
-              <Route path="/getallbookings" element={<GetAllBookings />} />
-              <Route path="/getuserbookings" element={<GetUserBookings />} />
-              <Route path="/finalbooking" element={<Finalbooking />} />
-            </Route>
-
-          
-          </Routes>
-        </div>
-      </Router>
+                <Route path="/bookingform" element={<BookingForm />} />
+                <Route path="/triplist" element={<TripList />} />
+                {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
+                <Route path="/bookings" element={<Bookings />} />
+                <Route path="/allbookings" element={<AllBookings />} />
+                <Route path="/createbooking" element={<CreateBooking />} />
+                <Route path="/fetchtrip" element={<FetchTrip />} />
+                <Route path="/getallbookings" element={<GetAllBookings />} />
+                <Route path="/getuserbookings" element={<GetUserBookings />} />
+                <Route path="/finalbooking" element={<Finalbooking />} />
+              </Route>
+            </Routes>
+          </div>
+        </Router>
+      </TripProvider>
     </AuthProvider>
   );
 }
