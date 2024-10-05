@@ -1,8 +1,30 @@
 import React, { useState } from "react";
 import newsletterimg from "../../assets/newsletter.jpg";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toast notifications
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
+
+  const handleSubscribe = (e) => {
+    e.preventDefault(); // Prevent the default form submission
+    if (email) {
+      // Display a success toast notification
+      toast.success("Subscribed to our newsletter!", {
+        position: "top-center mt-20",
+        autoClose: 2000,
+      });
+      // Clear the email input field
+      setEmail("");
+    } else {
+      // Optionally, display an error toast notification
+      toast.error("Please enter a valid email address.", {
+        position: "top-center", // Use a string for position
+        autoClose: 2000,
+      });
+    }
+  };
+
   return (
     <div className="relative h-screen mb-4">
       {/* Background Image */}
@@ -11,7 +33,6 @@ const Newsletter = () => {
         alt="Background"
         className="absolute inset-0 w-full p-4 rounded-2xl h-[680px] object-cover"
       />
-
       <div className="absolute left-0 top-0 flex h-full w-full items-center rounded-[0.625rem] lg:rounded-[1.25rem]">
         <div className="flex w-full max-w-[500px] flex-col gap-[3.75rem] text-white lg:pl-[3.75rem] 2xl:max-w-[600px]">
           <div className="px-5 text-center lg:px-0 lg:text-left">
@@ -27,7 +48,9 @@ const Newsletter = () => {
             </p>
           </div>
           <div className="mx-5 lg:mx-0">
-            <form action="#">
+            <form onSubmit={handleSubscribe}>
+              {" "}
+              {/* Update to use handleSubscribe */}
               <div className="relative flex items-center rounded-full bg-white p-2 pl-3 lg:pl-8 2xl:gap-12 2xl:p-4 2xl:pl-6">
                 <input
                   type="email"
@@ -48,6 +71,7 @@ const Newsletter = () => {
           </div>
         </div>
       </div>
+      <ToastContainer /> {/* Add the ToastContainer here */}
     </div>
   );
 };

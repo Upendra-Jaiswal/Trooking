@@ -4,6 +4,8 @@ import ProfileImage from "../../assets/blogsSmall1.jpeg";
 import BrandImage from "../../assets/biketrip.jpeg";
 import { AuthContext } from "../../context/AuthContext"; // Adjust the path
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toast notifications
 
 const NavBar = () => {
   const {
@@ -17,11 +19,8 @@ const NavBar = () => {
   } = useContext(AuthContext);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false); // For More dropdown
-  const [newdata, setNewData] = useState(false);
 
   const navigate = useNavigate();
-
-  const [isAuthenticatedNavbar, setIsAuthenticatedNavbar] = useState(false);
 
   const profileRef = useRef(null);
   const moreRef = useRef(null);
@@ -39,13 +38,15 @@ const NavBar = () => {
     setIsMoreOpen(false);
   };
 
-  const [count, setCount] = useState(0);
-
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
-  const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   const toastfunction = async () => {
+  //     toast.success("logged in!!", {
+  //       position: "top-center mt-20",
+  //       autoClose: 2000,
+  //     });
+  //   };
+  //   toastfunction();
+  // }, [userData]);
 
   const logout = async () => {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
