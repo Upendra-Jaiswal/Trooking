@@ -72,92 +72,6 @@ const WhyChooseUs = () => {
           </div>
         </div>
 
-        {/* Right Column - 8/12 width */}
-
-        {/* <div className="w-7/12 p-4 bg-white-400 flex flex-col">
-          <div className="flex flex-col">
-            <div className="h-4 bg-white-200 flex items-center">
-              <p className="text-sm font-bold text-gray-500">WHY CHOOSE US</p>
-            </div>
-
-            <div className="h-24 bg-white-300 flex items-center">
-              <p className="text-5xl font-bold text-white-600">
-                Why JustWravel
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col mb-4">
-            <div className="h-24 bg-white-200 mb-2 p-4">
-              <p className="text-lg font-semibold text-white-700">
-                "You are not living, if you are not dreaming"
-              </p>
-            </div>
-
-            <div className="h-24 bg-white-300 mb-2 p-4">
-              <p className="text-md text-white-600">
-                Years ago, when Justwravel organized its first trip, we had the
-                opportunity to turn other people's dreams into reality. We
-                became the bridge that narrowed the gap between individuals and
-                their travel dreams.
-              </p>
-            </div>
-
-            <div className="h-24 bg-white-400 p-4">
-              <p className="text-md text-white-600">
-                With over 7 years of experience and the sole aim of creating a
-                community of like-minded travelers,
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4">
-            <div className="flex flex-col items-center bg-white-200 p-4">
-              <FaUsers className="text-4xl text-gray-600 mb-2  bg-blue-300 p-2" />
-              <div className="text-white-800 font-bold text-2xl mb-2">
-                50,000+
-              </div>
-              <div className="text-white-700">Satisfied Travelers</div>
-            </div>
-
-            <div className="flex flex-col items-center bg-white-300 p-4">
-              <FaFemale className="text-4xl text-gray-600 mb-2  bg-blue-300 p-2" />
-              <div className="text-white-800 font-bold text-2xl mb-2">152</div>
-              <div className="text-white-700">All Girls Trip</div>
-            </div>
-
-            <div className="flex flex-col items-center bg-white-400 p-4">
-              <FaHiking className="text-4xl text-gray-600 mb-2  bg-blue-300 p-2" />
-              <div className="text-white-800 text-2xl font-bold mb-2 ">
-                1,200
-              </div>
-              <div className="text-white-700">Adventure Trips</div>
-            </div>
-
-            <div className="flex flex-col items-center bg-white-500 p-4">
-              <FaSmile className="text-4xl text-gray-600 mb-2  bg-blue-300 p-2" />
-              <div className="text-white-800 text-2xl font-bold mb-2">
-                3,500+
-              </div>
-              <div className="text-white-700">Happy Clients</div>
-            </div>
-
-            <div className="flex flex-col items-center bg-white-600 p-4">
-              <FaBus className="text-4xl text-gray-600 mb-2  bg-blue-300 p-2" />
-              <div className="text-white-800 text-2xl font-bold mb-2">700</div>
-              <div className="text-white-700">Group Tours</div>
-            </div>
-
-            <div className="flex flex-col items-center bg-white-700 p-4">
-              <FaUserFriends className="text-4xl text-gray-600 bg-blue-300 p-2 mb-2" />
-              <div className="text-white-800 text-2xl font-bold mb-2">
-                1,000
-              </div>
-              <div className="text-white-700">Solo Travelers</div>
-            </div>
-          </div>
-        </div> */}
-
         <div className="flex grow flex-col gap-4 lg:max-w-[55%] lg:gap-6 2xl:max-w-[55%] 2xl:gap-[3.5rem]">
           <div className="flex flex-col gap-[0.125rem] hidden lg:block">
             <p className="text-[0.75rem] font-medium uppercase tracking-[0.375rem] text-gray-light lg:text-p-md undefined">
@@ -254,7 +168,7 @@ const WhyChooseUs = () => {
                 class="text-p-sm font-medium text-blue lg:text-h6 font-poppins lg:font-normal"
                 onClick={toggleContent}
               >
-                {isExpanded ? 'View Less' : 'View More'}
+                {isExpanded ? "View Less" : "View More"}
               </button>
             </div>
           </div>

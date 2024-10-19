@@ -11,13 +11,13 @@ const Newsletter = () => {
     if (email) {
       // Display a success toast notification
       toast.success("Subscribed to our newsletter!", {
-        position: "top-center mt-20",
+        position: "top-center",
         autoClose: 2000,
       });
       // Clear the email input field
       setEmail("");
     } else {
-      // Optionally, display an error toast notification
+      // Display an error toast notification
       toast.error("Please enter a valid email address.", {
         position: "top-center", // Use a string for position
         autoClose: 2000,
@@ -26,43 +26,40 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="relative h-screen mb-4">
+    <div className="relative mb-4 h-[50vh] p-3 m-3 md:h-[80vh] lg:h-[70vh] xl:h-[680px] flex items-center justify-center">
       {/* Background Image */}
       <img
         src={newsletterimg}
         alt="Background"
-        className="absolute inset-0 w-full p-4 rounded-2xl h-[680px] object-cover"
+        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
       />
-      <div className="absolute left-0 top-0 flex h-full w-full items-center rounded-[0.625rem] lg:rounded-[1.25rem]">
-        <div className="flex w-full max-w-[500px] flex-col gap-[3.75rem] text-white lg:pl-[3.75rem] 2xl:max-w-[600px]">
-          <div className="px-5 text-center lg:px-0 lg:text-left">
-            <p className="text-p-md font-medium font-poppins uppercase tracking-[0.25rem]">
+      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-2xl">
+        <div className="flex flex-col items-center w-full max-w-[500px] p-6 lg:items-start lg:pl-12 xl:max-w-[600px] text-white">
+          <div className="text-center lg:text-left">
+            <p className="text-sm lg:text-base font-medium uppercase tracking-wide">
               Newsletter
             </p>
-            <h3 className="mt-1 text-h3-sm font-semibold font-poppins lg:text-h2">
+            <h3 className="mt-2 text-2xl lg:text-4xl font-semibold">
               Sign up now!
             </h3>
-            <p className="mt-5 text-p-xs lg:text-p-md">
+            <p className="mt-4 text-xs lg:text-base">
               Be the first one to know all about the Exciting Offers, Travel
               Updates and more.
             </p>
           </div>
-          <div className="mx-5 lg:mx-0">
+          <div className="mt-6 w-full">
             <form onSubmit={handleSubscribe}>
-              {" "}
-              {/* Update to use handleSubscribe */}
-              <div className="relative flex items-center rounded-full bg-white p-2 pl-3 lg:pl-8 2xl:gap-12 2xl:p-4 2xl:pl-6">
+              <div className="relative flex items-center w-full rounded-full bg-white p-2 pl-4 lg:pl-6">
                 <input
                   type="email"
                   placeholder="Enter Your Email"
-                  className="w-full grow px-4 py-2 text-black text-sm font-medium focus:outline-none lg:w-auto lg:text-lg"
-                  name="email"
-                  value={email} // Bind the input value to email state
-                  onChange={(e) => setEmail(e.target.value)} // Update email state on every change
+                  className="w-full grow px-1 py-1 text-sm lg:text-base text-black font-small focus:outline-none rounded-full placeholder:text-xs" // Added placeholder:text-xs
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 rounded-full bg-blue px-4 py-[0.625rem] text-p-sm font-medium text-white bg-blue-400 lg:px-12"
+                  className="absolute right-2 rounded-full bg-blue-500 hover:bg-blue-600 px-3 py-1 text-sm lg:text-base font-xs text-white lg:px-10"
                 >
                   Subscribe
                 </button>

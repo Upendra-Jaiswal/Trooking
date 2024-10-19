@@ -90,11 +90,11 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-9 mb-8 h-[600px] bg-gray-100">
+    <div className="flex flex-col items-center p-9 mb-9 h-[600px]">
       {/* Title */}
       <div className="flex flex-col items-center mb-4">
-        <h2 className="text-sm text-gray-500">Reviews</h2>
-        <h2 className="text-6xl font-bold text-gray-800 text-center">
+        <h2 className="text-sm lg:text-xl text-gray-500">Reviews</h2>
+        <h2 className="text-sm font-bold lg:text-3xl text-gray-800 text-center">
           What Our Clients Say About Us
         </h2>
       </div>
@@ -103,7 +103,7 @@ const Testimonials = () => {
       <Slider {...settings} className="w-full h-96">
         {reviews.map((review, index) => (
           <div key={index} className="p-4 h-96">
-            <div className="flex flex-col bg-white h-72 shadow-md rounded-lg p-4">
+            <div className="flex flex-col bg-white h-96 shadow-xl rounded-xl p-4">
               <div className="mb-2">
                 <p className="text-sm text-gray-700 text-center">
                   {review.reviewText}

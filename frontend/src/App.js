@@ -27,11 +27,23 @@ import FetchTrip from "./components/Trips/FetchTrip";
 import GetAllBookings from "./components/Trips/GetAllBookings";
 import GetUserBookings from "./components/Trips/GetUserBookings";
 import Finalbooking from "./components/Bookingbyid/Finalbooking";
-import NavBarLogin from "./components/NavBar/NavbarLogin";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+import { useReducer, createContext } from "react";
+
+import {
+  authReducer,
+  initialState,
+} from "./components/HomePage/Authentication/authReducer";
+
+export const AuthContextApp = createContext();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState("");
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(() => {
     // Simulating an authentication check
@@ -58,47 +70,57 @@ function App() {
   }, [userName]);
 
   return (
-    <AuthProvider>
-      <TripProvider>
-        <Router>
-          <Navbar className="mb-36" />
+    <AuthContextApp.Provider value={{ state, dispatch }}>
+      <AuthProvider>
+        <Provider store={store}>
+          <TripProvider>
+            <Router>
+              <Navbar className="mb-36" />
 
-          {/* <Navbar isAuthenticated={isAuthenticated} userName={userName} /> */}
-          <div style={{ marginTop: "6rem" }}>
-            {" "}
-            {/* Adjust based on your Navbar height */}
-            <Routes>
-              {/* <PrivateRoute path="/profile" component={Profile} /> */}
+              {/* <Navbar isAuthenticated={isAuthenticated} userName={userName} /> */}
+              <div style={{ marginTop: "6rem" }}>
+                {" "}
+                {/* Adjust based on your Navbar height */}
+                <Routes>
+                  {/* <PrivateRoute path="/profile" component={Profile} /> */}
 
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/" element={<HomeContainer />} />
-              <Route path="/bookingbyid" element={<BookingbyId />} />
-              <Route path="/" element={<PrivateRoute />}>
-                <Route path="/my-profile" element={<MyProfile />} />
-                <Route path="/" element={<NavBarLogin className="mb-36" />} />
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/" element={<HomeContainer />} />
+                  <Route path="/bookingbyid" element={<BookingbyId />} />
+                  {/* <Route path="/" element={<PrivateRoute />}> */}
+                  <Route element={<PrivateRoute />}>
+                    <Route path="/my-profile" element={<MyProfile />} />
 
-                <Route path="/mybookings" element={<MyBookings />} />
+                    <Route path="/mybookings" element={<MyBookings />} />
 
-                <Route path="/payment" element={<Payment />} />
-                <Route path="/taxi-booking" element={<TaxiBooking />} />
+                    <Route path="/payment" element={<Payment />} />
+                    <Route path="/taxi-booking" element={<TaxiBooking />} />
 
-                <Route path="/bookingform" element={<BookingForm />} />
-                <Route path="/triplist" element={<TripList />} />
-                {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
-                <Route path="/bookings" element={<Bookings />} />
-                <Route path="/allbookings" element={<AllBookings />} />
-                <Route path="/createbooking" element={<CreateBooking />} />
-                <Route path="/fetchtrip" element={<FetchTrip />} />
-                <Route path="/getallbookings" element={<GetAllBookings />} />
-                <Route path="/getuserbookings" element={<GetUserBookings />} />
-                <Route path="/finalbooking" element={<Finalbooking />} />
-              </Route>
-            </Routes>
-          </div>
-        </Router>
-      </TripProvider>
-    </AuthProvider>
+                    <Route path="/bookingform" element={<BookingForm />} />
+                    <Route path="/triplist" element={<TripList />} />
+                    {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
+                    <Route path="/bookings" element={<Bookings />} />
+                    <Route path="/allbookings" element={<AllBookings />} />
+                    <Route path="/createbooking" element={<CreateBooking />} />
+                    <Route path="/fetchtrip" element={<FetchTrip />} />
+                    <Route
+                      path="/getallbookings"
+                      element={<GetAllBookings />}
+                    />
+                    <Route
+                      path="/getuserbookings"
+                      element={<GetUserBookings />}
+                    />
+                    <Route path="/finalbooking" element={<Finalbooking />} />
+                  </Route>
+                </Routes>
+              </div>
+            </Router>
+          </TripProvider>
+        </Provider>
+      </AuthProvider>
+    </AuthContextApp.Provider>
   );
 }
 

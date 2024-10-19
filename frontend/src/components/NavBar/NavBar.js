@@ -2,26 +2,26 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ProfileImage from "../../assets/blogsSmall1.jpeg";
 import BrandImage from "../../assets/biketrip.jpeg";
-import { AuthContext } from "../../context/AuthContext"; // Adjust the path
+import { AuthContext } from "../../context/AuthContext";
+import { AuthContextApp } from "../../App";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toast notifications
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NavBar = () => {
-  const {
-    isAuthenticated,
-    userName,
-    setIsAuthenticated,
-    setUserName,
-    userData,
-    isAdmin,
-    setIsAdmin,
-  } = useContext(AuthContext);
+  const { token, userData, isAdmin } = useContext(AuthContext);
+  const { userInfo } = useSelector((state) => state.auth);
+  const { state } = useContext(AuthContextApp);
+  const username = state.userInfo?.name;
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isMoreOpen, setIsMoreOpen] = useState(false); // For More dropdown
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
-
   const profileRef = useRef(null);
   const moreRef = useRef(null);
 
@@ -38,25 +38,12 @@ const NavBar = () => {
     setIsMoreOpen(false);
   };
 
-  // useEffect(() => {
-  //   const toastfunction = async () => {
-  //     toast.success("logged in!!", {
-  //       position: "top-center mt-20",
-  //       autoClose: 2000,
-  //     });
-  //   };
-  //   toastfunction();
-  // }, [userData]);
-
   const logout = async () => {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
     await axios
       .post(`${backendUrl}/api/logout`, {}, { withCredentials: true })
       .then((response) => {
-        setIsAuthenticated(false);
-        setUserName(null);
-
         navigate("/");
         console.log("Logged out", response.data);
       })
@@ -65,10 +52,12 @@ const NavBar = () => {
       });
   };
 
-  // Close dropdown if clicked outside
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // If the click happens outside of profile or more dropdowns, close them
       if (
         profileRef.current &&
         !profileRef.current.contains(event.target) &&
@@ -86,225 +75,235 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div class="fixed left-0 top-0 z-30 hidden w-full items-center bg-white shadow-md h-[72px] lg:flex lg:h-[4rem] 2xl:h-[5.625rem] mb-9">
-      <div class="container flex items-center lg:gap-[1.5rem] md:gap-[1.0rem] 2xl:gap-[1.875rem]">
+    <div className="fixed left-0 top-0 z-30 w-full bg-white shadow-md h-[72px] lg:h-[4rem] 2xl:h-[5.625rem] mb-9">
+      <div className="container flex items-center justify-between px-6 py-2 lg:px-12">
         {/* Brand Section */}
         <div className="flex items-center">
-          {" "}
-          <img
-            src={BrandImage}
-            alt="Logo"
-            className="h-10 w-10 ml-20 rounded-full"
-          />
-          <Link to="/">
-            {" "}
-            <span className="ml-2 text-xl font-bold text-gray-800">
-              Trooking
-            </span>
+          <img src={BrandImage} alt="Logo" className="h-10 w-10 rounded-full" />
+          <Link to="/" className="ml-2 text-xl font-bold text-gray-800">
+            Trooking
           </Link>
         </div>
 
-        <div class="flex grow items-center justify-center gap-6 text-black 2xl:gap-[2.5rem] lg:gap-[1.0rem]">
-          <div class="relative flex items-center justify-center"></div>
-          <Link
-            to="/backpacking-trips"
-            className="2xl:text-p-md font-normal font-poppins"
-          >
-            Backpacking Trips
-          </Link>
-          <div>
-            <Link
-              to="/treks"
-              className="2xl:text-p-md font-normal font-poppins"
-            >
-              Treks
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/treks"
-              className="2xl:text-p-md font-normal font-poppins"
-            >
-              Weekend Gateaways
-            </Link>
-          </div>
-          {/* More Dropdown */}
-          <div className="relative" ref={moreRef}>
-            <button
-              className="2xl:text-p-md font-normal font-poppins"
-              onClick={toggleMoreDropdown}
-            >
-              More
-            </button>
-            {isMoreOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
-                <Link
-                  to="/adventure"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  Girl's Trip
-                </Link>
-                <Link
-                  to="/culture-trips"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  Corporate Trip
-                </Link>
-                <Link
-                  to="/wildlife-tours"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  About US
-                </Link>
-                <Link
-                  to="/wildlife-tours"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  Contact
-                </Link>
-                <Link
-                  to="/wildlife-tours"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  Newsletter
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div class="flex items-center px-[.375rem] lg:gap-[.25rem] 2xl:gap-[.375rem]">
-          <div class="rounded-full bg-gray-100 text-h6 shadow-md lg:p-2 2xl:p-3">
-            <svg
-              xmlns="https://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              fill="#717171"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 00-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"
-              ></path>
-            </svg>
-          </div>
-
-          <div class="text-gray-dark">
-            <p class="text-p-sm leading-4">Call Us</p>
-            <a
-              href="tel:+919667051161"
-              class="block whitespace-nowrap text-p-md font-medium leading-4"
-            >
-              +919667051161
-            </a>
-          </div>
-          <div class="flex items-center lg:gap-[.75rem] 2xl:gap-[1.25rem]">
-            <button class="rounded-full bg-blue shadow-lg lg:p-2 2xl:p-3">
-              <svg
-                xmlns="https://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="none"
-                viewBox="0 0 24 24"
-                class="text-h5 text-white"
-              >
-                <path
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  d="M10 3a7 7 0 104.192 12.606l4.101 4.101a1 1 0 001.414-1.414l-4.1-4.1A7 7 0 0010 3zm-5 7a5 5 0 1110 0 5 5 0 01-10 0z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </button>
-            <div class="trasnition-all duration-300 ease-out "></div>
-          </div>
-          <div className="hidden md:flex items-center">
-            {isAuthenticated ? (
-              <div className="relative flex" ref={profileRef}>
-                <span className="text-gray-700 mr-2">{userName}</span>
-                <img
-                  src={ProfileImage}
-                  alt="Profile"
-                  className="h-10 w-10 rounded-full cursor-pointer"
-                  onClick={toggleProfileDropdown}
-                />
-                {isProfileOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50">
-                    <Link
-                      to="/my-profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={closeDropdown}
-                    >
-                      My Profile
-                    </Link>
-                    <a
-                      href="#settings"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={closeDropdown}
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#notifications"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={closeDropdown}
-                    >
-                      Notifications
-                    </a>
-                    <a
-                      href="#logout"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={logout}
-                    >
-                      Logout
-                    </a>
-                  </div>
-                )}
-              </div>
-            ) : (
-              // <button className="bg-blue-400 p-2 rounded-lg">
-              //   <Link to="/signin">LogIn</Link>
-              // </button>
-
-              <div>
-                <Link
-                  to="/signin"
-                  className="bg-blue-600 px-[26px] py-[12px]  text-white rounded-2xl w-[94px] h-[43px]"
-                >
-                  LogIn
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        {/* Hamburger Icon (Mobile) */}
+        <div className="lg:hidden">
           <button
-            type="button"
-            className="text-gray-600 hover:text-gray-900 focus:outline-none"
+            onClick={toggleMobileMenu}
+            className="text-gray-800 focus:outline-none"
           >
             <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
+                d="M4 6h16M4 12h16m-7 6h7"
               />
             </svg>
           </button>
         </div>
+
+        {/* Desktop Links */}
+        <div className="hidden lg:flex lg:items-center lg:gap-6">
+          <Link to="/backpacking-trips" className="font-normal">
+            Backpacking Trips
+          </Link>
+          <Link to="/treks" className="font-normal">
+            Treks
+          </Link>
+          <Link to="/weekend-gateways" className="font-normal">
+            Weekend Getaways
+          </Link>
+
+          {/* More Dropdown */}
+          {/* <div className="relative" ref={moreRef}>
+            <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
+              <Link
+                to="/adventure"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                Girl's Trip
+              </Link>
+              <Link
+                to="/corporate-trip"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                Corporate Trip
+              </Link>
+              <Link
+                to="/about"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                About Us
+              </Link>
+              <Link
+                to="/contact"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                Contact
+              </Link>
+              <Link
+                to="/newsletter"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                Newsletter
+              </Link>
+            </div>
+          </div> */}
+
+          {/* Profile or Login */}
+          {userInfo ? (
+            <div className="relative flex items-center" ref={profileRef}>
+              <span className="mr-2 text-gray-700">{userInfo.name}</span>
+              <img
+                src={ProfileImage}
+                alt="Profile"
+                className="h-10 w-10 rounded-full cursor-pointer"
+                onClick={toggleProfileDropdown}
+              />
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50">
+                  <Link
+                    to="/my-profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    My Profile
+                  </Link>
+                  <a
+                    href="#settings"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    Settings
+                  </a>
+                  <a
+                    href="#logout"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={logout}
+                  >
+                    Logout
+                  </a>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              to="/signin"
+              className="bg-blue-600 px-6 py-2 text-white rounded-xl"
+            >
+              Log In
+            </Link>
+          )}
+        </div>
+
+        {/* Mobile Menu (Sidebar) */}
+        {isMobileMenuOpen && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-75 z-40">
+            {/* Sidebar on the right */}
+            <div className="fixed right-0 top-0 h-full bg-white w-64 z-50 flex flex-col py-4 shadow-lg">
+              {/* Close button */}
+              <button
+                onClick={toggleMobileMenu}
+                className="text-gray-800 self-end pr-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              {/* Sidebar Links */}
+              <Link to="/backpacking-trips" className="py-2 px-4 w-full">
+                Backpacking Trips
+              </Link>
+              <Link to="/treks" className="py-2 px-4 w-full">
+                Treks
+              </Link>
+              <Link to="/weekend-gateways" className="py-2 px-4 w-full">
+                Weekend Getaways
+              </Link>
+
+              <div className="flex flex-col px-4">
+                <Link
+                  to="/adventure"
+                  className="block py-2 hover:bg-gray-100"
+                  onClick={closeDropdown}
+                >
+                  Girl's Trip
+                </Link>
+                <Link
+                  to="/corporate-trip"
+                  className="block py-2 hover:bg-gray-100"
+                  onClick={closeDropdown}
+                >
+                  Corporate Trip
+                </Link>
+                <Link
+                  to="/about"
+                  className="block py-2 hover:bg-gray-100"
+                  onClick={closeDropdown}
+                >
+                  About Us
+                </Link>
+                <Link
+                  to="/contact"
+                  className="block py-2 hover:bg-gray-100"
+                  onClick={closeDropdown}
+                >
+                  Contact
+                </Link>
+                <Link
+                  to="/newsletter"
+                  className="block py-2 hover:bg-gray-100"
+                  onClick={closeDropdown}
+                >
+                  Newsletter
+                </Link>
+              </div>
+
+              {/* Log In or Profile */}
+              {userInfo ? (
+                <div className="flex items-center p-4">
+                  <img
+                    src={ProfileImage}
+                    alt="Profile"
+                    className="h-10 w-10 rounded-full mr-2"
+                  />
+                  <span className="text-gray-700">{userInfo.name}</span>
+                </div>
+              ) : (
+                <Link
+                  to="/signin"
+                  className="bg-blue-600 p-2 m-2 w-[100px] text-center text-white rounded-xl"
+                  onClick={toggleMobileMenu}
+                >
+                  Log In
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

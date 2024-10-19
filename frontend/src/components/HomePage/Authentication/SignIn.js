@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthContextApp } from "../../../App";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Hook for navigation
+  const [user, setUser] = useState(null);
+  //const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { dispatch } = useContext(AuthContextApp);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +34,22 @@ const SignIn = () => {
           // Handle the response here
           navigate("/");
           console.log(response.data);
+
+          // Destructure the response to get the auth token and user data
+          //  const { authtoken, userData } = response.data;
+
+          // Save user data in localStorage and dispatch action to set global state
+          localStorage.setItem("userInfo", response.data.name);
+          // localStorage.setItem("authtoken", authtoken);
+
+          dispatch({ type: "LOGIN", payload: response.data });
+          // const { authtoken, userData } = response.data;
+          // let username = response.data.name;
+          // localStorage.setItem("authtoken", authtoken);
+          // localStorage.setItem("username", username); // Save user info
+          // setUser(username);
+
+          //    localStorage.setItem("userInfo", JSON.stringify(userData)); // Save user info
         })
         .catch((error) => {
           // Handle any errors here

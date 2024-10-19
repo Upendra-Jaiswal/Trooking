@@ -57,7 +57,7 @@ const HomeContainer = () => {
         <TaxiBanner />
         <Swiper />
         <Testimonials />
-        <WhyChooseus />
+        {/* <WhyChooseus /> */}
         <Blogs />
         <FAQ />
         <Recognition />
