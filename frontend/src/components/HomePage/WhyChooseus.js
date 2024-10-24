@@ -22,8 +22,8 @@ const WhyChooseUs = () => {
     setIsExpanded(!isExpanded);
   };
   return (
-    <div class="bg-white p-5 lg:py-20">
-      <div class="flex flex-wrap gap-6 lg:container lg:flex-nowrap lg:gap-16 2xl:gap-[8.75rem]">
+    <div className="bg-white p-5 lg:py-20">
+      <div className="flex flex-wrap gap-6 lg:container lg:flex-nowrap lg:gap-16 2xl:gap-[8.75rem]">
         <div className="w-5/12 p-4 bg-white-100">
           <div className="flex h-screen">
             <div className="w-6/12 p-4 bg-white-100 flex flex-col">
@@ -122,14 +122,14 @@ const WhyChooseUs = () => {
                     both thrilling and secure.
                   </p>
                   <div>
-                    <p class="text-p-sm font-poppins lg:text-p-lg">
+                    <p className="text-p-sm font-poppins lg:text-p-lg">
                       Being the first travel community to provide free travel
                       insurance for adventure activities up to 4.5 lakhs, we
                       financially back our customers. Our constant dedication
                       and hard work have helped us earn the following
                       achievements:
                     </p>
-                    <ul class="list-disc pl-6 text-left text-p-sm font-poppins text-gray-600 lg:text-p-md">
+                    <ul className="list-disc pl-6 text-left text-p-sm font-poppins text-gray-600 lg:text-p-md">
                       <li>Incubated by IIM Bangalore | NSRCEL</li>
                       <li>
                         A proud member of Uttar Pradesh Tourism, recognized as
@@ -147,14 +147,14 @@ const WhyChooseUs = () => {
                       <li>Featured on Business Standard and ANI</li>
                     </ul>
                   </div>
-                  <p class="text-p-sm font-poppins lg:text-p-lg">
+                  <p className="text-p-sm font-poppins lg:text-p-lg">
                     At Justwravel, we are not just a travel agency ; we are a
                     community of passionate explorers dedicated to crafting the
                     ultimate travel experiences for you. All the milestones we
                     have achieved are a result of the constant support and
                     positive feedback from our travelers.
                   </p>
-                  <p class="text-p-sm font-poppins lg:text-p-lg">
+                  <p className="text-p-sm font-poppins lg:text-p-lg">
                     From the very beginning to this day, all Justwravel has
                     tried and worked is for the community, for the divine places
                     we witness, and for the passion of Travel. Don't think you
@@ -163,26 +163,26 @@ const WhyChooseUs = () => {
                 </div>
               </div>
             </div>
-            <div class="p-4 text-center  font-poppins lg:p-[1.875rem] lg:text-right pt-2 lg:pt-2">
+            <div className="p-4 text-center  font-poppins lg:p-[1.875rem] lg:text-right pt-2 lg:pt-2">
               <button
-                class="text-p-sm font-medium text-blue lg:text-h6 font-poppins lg:font-normal"
+                className="text-p-sm font-medium text-blue lg:text-h6 font-poppins lg:font-normal"
                 onClick={toggleContent}
               >
                 {isExpanded ? "View Less" : "View More"}
               </button>
             </div>
           </div>
-          <div class="flex flex-wrap gap-4 lg:gap-[1.875rem]">
-            <div class="grow basis-[30%]">
-              <div class="flex flex-col items-center gap-2 2xl:block">
-                <div class="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
+          <div className="flex flex-wrap gap-4 lg:gap-[1.875rem]">
+            <div className="grow basis-[30%]">
+              <div className="flex flex-col items-center gap-2 2xl:block">
+                <div className="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
                   <svg
                     xmlns="https://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     fill="none"
                     viewBox="0 0 28 28"
-                    class="text-[1.5rem] text-blue lg:text-[2.5rem]"
+                    className="text-[1.5rem] text-blue lg:text-[2.5rem]"
                   >
                     <path
                       fill="currentColor"
@@ -190,21 +190,23 @@ const WhyChooseUs = () => {
                     ></path>
                   </svg>
                 </div>
-                <div class="text-center lg:mt-4 2xl:text-left">
-                  <h6 class="text-p-xs font-semibold lg:text-h6">50,000+</h6>
-                  <p class="text-p-xs lg:text-p-md">Satisfied Travelers</p>
+                <div className="text-center lg:mt-4 2xl:text-left">
+                  <h6 className="text-p-xs font-semibold lg:text-h6">
+                    50,000+
+                  </h6>
+                  <p className="text-p-xs lg:text-p-md">Satisfied Travelers</p>
                 </div>
               </div>
             </div>
-            <div class="grow basis-[30%]">
-              <div class="flex flex-col items-center gap-2 2xl:block">
-                <div class="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
+            <div className="grow basis-[30%]">
+              <div className="flex flex-col items-center gap-2 2xl:block">
+                <div className="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
                   <svg
                     xmlns="https://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     fill="none"
-                    class="text-[1.5rem] text-blue lg:text-[2.5rem]"
+                    className="text-[1.5rem] text-blue lg:text-[2.5rem]"
                     viewBox="0 0 32 33"
                   >
                     <path
@@ -213,22 +215,22 @@ const WhyChooseUs = () => {
                     ></path>
                   </svg>
                 </div>
-                <div class="text-center lg:mt-4 2xl:text-left">
-                  <h6 class="text-p-xs font-semibold lg:text-h6">150+</h6>
-                  <p class="text-p-xs lg:text-p-md">All Girls Trips</p>
+                <div className="text-center lg:mt-4 2xl:text-left">
+                  <h6 className="text-p-xs font-semibold lg:text-h6">150+</h6>
+                  <p className="text-p-xs lg:text-p-md">All Girls Trips</p>
                 </div>
               </div>
             </div>
-            <div class="grow basis-[30%]">
-              <div class="flex flex-col items-center gap-2 2xl:block">
-                <div class="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
+            <div className="grow basis-[30%]">
+              <div className="flex flex-col items-center gap-2 2xl:block">
+                <div className="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
                   <svg
                     xmlns="https://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     fill="none"
                     viewBox="0 0 28 28"
-                    class="text-[1.5rem] text-blue lg:text-[2.5rem]"
+                    className="text-[1.5rem] text-blue lg:text-[2.5rem]"
                   >
                     <path
                       fill="currentColor"
@@ -240,22 +242,22 @@ const WhyChooseUs = () => {
                     ></path>
                   </svg>
                 </div>
-                <div class="text-center lg:mt-4 2xl:text-left">
-                  <h6 class="text-p-xs font-semibold lg:text-h6">250+</h6>
-                  <p class="text-p-xs lg:text-p-md">Bike Trips</p>
+                <div className="text-center lg:mt-4 2xl:text-left">
+                  <h6 className="text-p-xs font-semibold lg:text-h6">250+</h6>
+                  <p className="text-p-xs lg:text-p-md">Bike Trips</p>
                 </div>
               </div>
             </div>
-            <div class="grow basis-[30%]">
-              <div class="flex flex-col items-center gap-2 2xl:block">
-                <div class="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
+            <div className="grow basis-[30%]">
+              <div className="flex flex-col items-center gap-2 2xl:block">
+                <div className="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
                   <svg
                     xmlns="https://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     fill="none"
                     viewBox="0 0 28 28"
-                    class="text-[1.5rem] text-blue lg:text-[2.5rem]"
+                    className="text-[1.5rem] text-blue lg:text-[2.5rem]"
                   >
                     <path
                       fill="currentColor"
@@ -267,22 +269,24 @@ const WhyChooseUs = () => {
                     ></path>
                   </svg>
                 </div>
-                <div class="text-center lg:mt-4 2xl:text-left">
-                  <h6 class="text-p-xs font-semibold lg:text-h6">Customized</h6>
-                  <p class="text-p-xs lg:text-p-md">Corporate Trips</p>
+                <div className="text-center lg:mt-4 2xl:text-left">
+                  <h6 className="text-p-xs font-semibold lg:text-h6">
+                    Customized
+                  </h6>
+                  <p className="text-p-xs lg:text-p-md">Corporate Trips</p>
                 </div>
               </div>
             </div>
-            <div class="grow basis-[30%]">
-              <div class="flex flex-col items-center gap-2 2xl:block">
-                <div class="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
+            <div className="grow basis-[30%]">
+              <div className="flex flex-col items-center gap-2 2xl:block">
+                <div className="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
                   <svg
                     xmlns="https://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     fill="none"
                     viewBox="0 0 28 28"
-                    class="text-[1.5rem] text-blue lg:text-[2.5rem]"
+                    className="text-[1.5rem] text-blue lg:text-[2.5rem]"
                   >
                     <path
                       fill="currentColor"
@@ -290,24 +294,24 @@ const WhyChooseUs = () => {
                     ></path>
                   </svg>
                 </div>
-                <div class="text-center lg:mt-4 2xl:text-left">
-                  <h6 class="text-p-xs font-semibold lg:text-h6">
+                <div className="text-center lg:mt-4 2xl:text-left">
+                  <h6 className="text-p-xs font-semibold lg:text-h6">
                     Hand-picked
                   </h6>
-                  <p class="text-p-xs lg:text-p-md">Itineraries</p>
+                  <p className="text-p-xs lg:text-p-md">Itineraries</p>
                 </div>
               </div>
             </div>
-            <div class="grow basis-[30%]">
-              <div class="flex flex-col items-center gap-2 2xl:block">
-                <div class="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
+            <div className="grow basis-[30%]">
+              <div className="flex flex-col items-center gap-2 2xl:block">
+                <div className="inline-block rounded-[.325rem] bg-blue-tint p-2 lg:p-3">
                   <svg
                     xmlns="https://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
                     fill="none"
                     viewBox="0 0 24 24"
-                    class="text-[1.5rem] text-blue lg:text-[2.5rem]"
+                    className="text-[1.5rem] text-blue lg:text-[2.5rem]"
                   >
                     <path
                       fill="currentColor"
@@ -321,9 +325,9 @@ const WhyChooseUs = () => {
                     ></path>
                   </svg>
                 </div>
-                <div class="text-center lg:mt-4 2xl:text-left">
-                  <h6 class="text-p-xs font-semibold lg:text-h6">7095+</h6>
-                  <p class="text-p-xs lg:text-p-md"> Reviews</p>
+                <div className="text-center lg:mt-4 2xl:text-left">
+                  <h6 className="text-p-xs font-semibold lg:text-h6">7095+</h6>
+                  <p className="text-p-xs lg:text-p-md"> Reviews</p>
                 </div>
               </div>
             </div>

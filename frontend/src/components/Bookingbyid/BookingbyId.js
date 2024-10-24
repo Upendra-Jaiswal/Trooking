@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 import bookbyidimgbiggest from "../../assets/bookbyidimgbiggest.jpg";
 import bookbyidimgbig from "../../assets/bookbyidimgbig.jpg";
 import bookbyidimgsmall11 from "../../assets/bookbyidimgsmall11.jpg";
@@ -94,11 +93,8 @@ const MyComponent = () => {
 
   const currentReview = reviewsData[currentReviewIndex];
   useEffect(() => {
-    console.log(trip, "data");
+    // //console.log(trip, "data");
   }, []);
-  // if (loading) {
-  //   return <div className="text-center text-lg font-semibold">Loading...</div>;
-  // }
 
   const toggleDay = (day) => {
     setOpenDay(openDay === day ? null : day); // Toggle open/close for the selected day
@@ -521,7 +517,7 @@ const MyComponent = () => {
             {/* First Column - 2/12 width */}
             <div className="w-2/12 text-center p-2">
               <p className="line-through text-red-500 text-lg">
-              ₹{trip.price + 2000}
+                ₹{trip.price + 2000}
               </p>
             </div>
 

@@ -14,7 +14,7 @@ const GetUserBookings = () => {
           withCredentials: true, // Ensure cookies are sent with the request
         });
         setBookings(response.data.data);
-        console.log(response.data.data, "data");
+        //console.log(response.data.data, "data");
       } catch (err) {
         setError(err.response ? err.response.data.message : "Server Error");
       } finally {

@@ -15,7 +15,7 @@ const GetAllBookings = () => {
           withCredentials: true,
         });
         setBookings(response.data.data);
-        console.log(response.data.data);
+        //console.log(response.data.data);
       } catch (err) {
         console.error("Error fetching bookings:", err);
         setError("Failed to fetch bookings. Please try again later.");

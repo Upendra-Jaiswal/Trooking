@@ -11,7 +11,7 @@ const CreateBooking = () => {
 
   const handleBooking = () => {
     // Handle booking logic (e.g., API call)
-    console.log("Booking created for trip:", trip);
+    //console.log("Booking created for trip:", trip);
   };
 
   return (

@@ -22,7 +22,7 @@ const Payment = () => {
       transactionId: "T" + Date.now(),
     };
 
-    console.log(data);
+    //console.log(data);
 
     await axios
       .post(`${backendUrl}/order`, { ...data })

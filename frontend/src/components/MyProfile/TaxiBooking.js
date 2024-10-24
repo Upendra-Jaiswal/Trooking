@@ -9,7 +9,7 @@ const TaxiBooking = () => {
     email: "",
     phone: "",
     travelFrom: "",
-    travelTo: "",  // Added Travel To field
+    travelTo: "", // Added Travel To field
   });
 
   const [errors, setErrors] = useState({});
@@ -25,14 +25,17 @@ const TaxiBooking = () => {
 
   const validateForm = () => {
     let formErrors = {};
-    if (!formData.vehicleType) formErrors.vehicleType = "Vehicle type is required.";
+    if (!formData.vehicleType)
+      formErrors.vehicleType = "Vehicle type is required.";
     if (!formData.fromDate) formErrors.fromDate = "From date is required.";
     if (!formData.toDate) formErrors.toDate = "To date is required.";
     if (!formData.name) formErrors.name = "Name is required.";
     if (!formData.email) formErrors.email = "Email is required.";
     if (!formData.phone) formErrors.phone = "Phone number is required.";
-    if (!formData.travelFrom) formErrors.travelFrom = "Traveling from location is required.";
-    if (!formData.travelTo) formErrors.travelTo = "Traveling to location is required."; // Added validation for Travel To
+    if (!formData.travelFrom)
+      formErrors.travelFrom = "Traveling from location is required.";
+    if (!formData.travelTo)
+      formErrors.travelTo = "Traveling to location is required."; // Added validation for Travel To
 
     return formErrors;
   };
@@ -53,7 +56,7 @@ const TaxiBooking = () => {
 
         if (response.ok) {
           const result = await response.json();
-          console.log("Taxi booked successfully!", result);
+          //console.log("Taxi booked successfully!", result);
           setIsSubmitted(true);
         } else {
           console.error("Error booking taxi:", response.statusText);
@@ -69,7 +72,9 @@ const TaxiBooking = () => {
   if (isSubmitted) {
     return (
       <div className="max-w-lg mx-auto p-4 bg-white rounded shadow text-center">
-        <h2 className="text-3xl font-bold mb-4 text-green-600">Booking Confirmed!</h2>
+        <h2 className="text-3xl font-bold mb-4 text-green-600">
+          Booking Confirmed!
+        </h2>
         <p className="text-lg">
           Thank you, {formData.name}, your taxi has been successfully booked.
         </p>
@@ -77,9 +82,11 @@ const TaxiBooking = () => {
         <p className="text-lg">From Date: {formData.fromDate}</p>
         <p className="text-lg">To Date: {formData.toDate}</p>
         <p className="text-lg">Traveling From: {formData.travelFrom}</p>
-        <p className="text-lg">Traveling To: {formData.travelTo}</p> {/* Display Travel To */}
+        <p className="text-lg">Traveling To: {formData.travelTo}</p>{" "}
+        {/* Display Travel To */}
         <p className="text-lg">
-          We will contact you at {formData.email} or {formData.phone} for further details.
+          We will contact you at {formData.email} or {formData.phone} for
+          further details.
         </p>
         <p className="text-lg mt-4">Safe travels!</p>
       </div>
@@ -185,7 +192,9 @@ const TaxiBooking = () => {
 
         {/* Traveling From */}
         <div className="mb-4">
-          <label className="block text-gray-700">From Where You Are Travelling</label>
+          <label className="block text-gray-700">
+            From Where You Are Travelling
+          </label>
           <input
             type="text"
             name="travelFrom"
@@ -203,7 +212,7 @@ const TaxiBooking = () => {
           <label className="block text-gray-700">Traveling To</label>
           <input
             type="text"
-            name="travelTo"  // Added Travel To field
+            name="travelTo" // Added Travel To field
             value={formData.travelTo}
             onChange={handleChange}
             className="w-full p-2 border rounded mt-1"

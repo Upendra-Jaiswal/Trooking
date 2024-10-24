@@ -63,7 +63,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", taxiBookingRoutes);
 
-app.use("/api",  tripRoutes);
+app.use("/api", tripRoutes);
 // app.use("/api", bookingRoutes);
 app.use("/api", tripBookingRoutes);
 //app.use("/api", userRoutes);
@@ -135,14 +135,14 @@ app.post("/order", async (req, res) => {
 
     await axios(options)
       .then(function (response) {
-        console.log(response.data);
+        // //console.log(response.data);
         return res.json(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 });
 
@@ -179,11 +179,11 @@ app.post("/status", async (req, res) => {
       }
     })
     .catch(function (error) {
-      console.log(error);
+      //console.log(error);
     });
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  //console.log(`Server is running on port ${PORT}`);
 });

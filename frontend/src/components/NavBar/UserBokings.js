@@ -15,7 +15,7 @@
 //           withCredentials: true, // Include credentials for authentication
 //         });
 //         setBookings(response.data.data); // Set bookings data
-//         // console.log(response.data.data);
+//         // //console.log(response.data.data);
 //       } catch (err) {
 //         setError(err.response ? err.response.data : "Error fetching bookings");
 //       } finally {
@@ -112,10 +112,7 @@ const UserBookings = () => {
       {bookings.length > 0 ? (
         <ul className="space-y-4">
           {bookings.map((booking) => (
-            <li
-              key={booking._id}
-              className="flex justify-between p-4 border-b"
-            >
+            <li key={booking._id} className="flex justify-between p-4 border-b">
               <div>
                 <h3 className="font-medium">{booking.tripName}</h3>
                 <p className="text-gray-600">Price: ₹{booking.tripPrice}</p>

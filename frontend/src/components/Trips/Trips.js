@@ -66,9 +66,9 @@ const TripSelection = () => {
     navigate("/bookingbyid", { state: { trip } }); // Pass the selected trip as state
   };
   return (
-    <div class="mx-2 my-20 hidden lg:block">
-      <div class="grid grid-cols-4 gap-4 2xl:gap-[1.875rem]">
-        <div class="col-span-1 rounded-[12px] bg-white p-[1.875rem]">
+    <div className="mx-2 my-20 hidden lg:block">
+      <div className="grid grid-cols-4 gap-4 2xl:gap-[1.875rem]">
+        <div className="col-span-1 rounded-[12px] bg-white p-[1.875rem]">
           <div className="">
             <h2 className="text-2xl font-light font-poppins mb-4">
               Select from our Tours
@@ -97,7 +97,7 @@ const TripSelection = () => {
           </div>
         </div>
 
-        <div class="col-span-3 grid grid-cols-1 lg:gap-[1rem] 2xl:gap-[1.875rem]">
+        <div className="col-span-3 grid grid-cols-1 lg:gap-[1rem] 2xl:gap-[1.875rem]">
           {loading ? (
             <p>Loading trips...</p>
           ) : (

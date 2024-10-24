@@ -3,53 +3,29 @@ import { Link, useNavigate } from "react-router-dom";
 import ProfileImage from "../../assets/blogsSmall1.jpeg";
 import BrandImage from "../../assets/biketrip.jpeg";
 import { AuthContext } from "../../context/AuthContext";
-import { AuthContextApp } from "../../App";
-import { useSelector } from "react-redux";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const NavBar = () => {
-  const { token, userData, isAdmin } = useContext(AuthContext);
-  const { userInfo } = useSelector((state) => state.auth);
-  const { state } = useContext(AuthContextApp);
-  const username = state.userInfo?.name;
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isAuthenticated, login, logout } = useContext(AuthContext);
+
+  const profileRef = useRef(null);
+
+  const handleLogout = () => {
+    setIsProfileOpen(false);
+    logout();
+  };
 
   const navigate = useNavigate();
-  const profileRef = useRef(null);
-  const moreRef = useRef(null);
 
   const toggleProfileDropdown = () => {
     setIsProfileOpen((prev) => !prev);
   };
 
-  const toggleMoreDropdown = () => {
-    setIsMoreOpen((prev) => !prev);
-  };
-
   const closeDropdown = () => {
     setIsProfileOpen(false);
-    setIsMoreOpen(false);
-  };
-
-  const logout = async () => {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-    await axios
-      .post(`${backendUrl}/api/logout`, {}, { withCredentials: true })
-      .then((response) => {
-        navigate("/");
-        console.log("Logged out", response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const toggleMobileMenu = () => {
@@ -58,12 +34,8 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        profileRef.current &&
-        !profileRef.current.contains(event.target) &&
-        moreRef.current &&
-        !moreRef.current.contains(event.target)
-      ) {
+      // Check if the click is outside the profile dropdown and the profile image
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
         closeDropdown();
       }
     };
@@ -120,51 +92,10 @@ const NavBar = () => {
             Weekend Getaways
           </Link>
 
-          {/* More Dropdown */}
-          {/* <div className="relative" ref={moreRef}>
-            <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
-              <Link
-                to="/adventure"
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={closeDropdown}
-              >
-                Girl's Trip
-              </Link>
-              <Link
-                to="/corporate-trip"
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={closeDropdown}
-              >
-                Corporate Trip
-              </Link>
-              <Link
-                to="/about"
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={closeDropdown}
-              >
-                About Us
-              </Link>
-              <Link
-                to="/contact"
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={closeDropdown}
-              >
-                Contact
-              </Link>
-              <Link
-                to="/newsletter"
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={closeDropdown}
-              >
-                Newsletter
-              </Link>
-            </div>
-          </div> */}
-
           {/* Profile or Login */}
-          {userInfo ? (
+          {isAuthenticated ? (
             <div className="relative flex items-center" ref={profileRef}>
-              <span className="mr-2 text-gray-700">{userInfo.name}</span>
+              <span className="mr-2 text-gray-700">{user.username}</span>
               <img
                 src={ProfileImage}
                 alt="Profile"
@@ -172,7 +103,7 @@ const NavBar = () => {
                 onClick={toggleProfileDropdown}
               />
               {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50 mt-[100px]">
                   <Link
                     to="/my-profile"
                     className="block px-4 py-2 hover:bg-gray-100"
@@ -190,7 +121,7 @@ const NavBar = () => {
                   <a
                     href="#logout"
                     className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={logout}
+                    onClick={handleLogout}
                   >
                     Logout
                   </a>
@@ -283,14 +214,25 @@ const NavBar = () => {
               </div>
 
               {/* Log In or Profile */}
-              {userInfo ? (
-                <div className="flex items-center p-4">
-                  <img
-                    src={ProfileImage}
-                    alt="Profile"
-                    className="h-10 w-10 rounded-full mr-2"
-                  />
-                  <span className="text-gray-700">{userInfo.name}</span>
+              {isAuthenticated ? (
+                <div>
+                  <div className="flex items-center p-4">
+                    <img
+                      src={ProfileImage}
+                      alt="Profile"
+                      className="h-10 w-10 rounded-full mr-2"
+                    />
+                    <span className="text-gray-700">{user.username}</span>
+                  </div>
+                  <div>
+                    <a
+                      href="#logout"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </a>
+                  </div>
                 </div>
               ) : (
                 <Link

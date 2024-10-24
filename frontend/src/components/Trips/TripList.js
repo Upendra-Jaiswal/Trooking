@@ -104,7 +104,7 @@ const TripsList = () => {
       //       withCredentials: true,
       //     });
       //     setTrips(response.data.data); // Extract trip data
-      //     console.log(response.data.data)
+      //     //console.log(response.data.data)
       //   } catch (err) {
       //     setError(err.response ? err.response.data : "Error fetching trips");
       //   } finally {
@@ -115,7 +115,7 @@ const TripsList = () => {
           withCredentials: true, // Send cookies for authentication
         });
         setBookings(response.data.data); // Set fetched booking data
-        console.log(response)
+        //console.log(response)
       } catch (err) {
         setError(err.response ? err.response.data : "Error fetching bookings");
       } finally {
@@ -136,7 +136,7 @@ const TripsList = () => {
 
       // Update bookings state with the newly booked trip
       setBookings((prevBookings) => [...prevBookings, response.data.data]); // Assuming response contains the booked trip data
-      console.log(response.data.data);
+      //console.log(response.data.data);
       alert("Booking successful!", response.data.data); // Alert user about booking success
     } catch (err) {
       setError(err.response ? err.response.data : "Error booking trip");

@@ -23,7 +23,7 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission (e.g., send to API)
-    console.log("Profile submitted:", profileData);
+    //console.log("Profile submitted:", profileData);
   };
 
   return (

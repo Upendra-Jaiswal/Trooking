@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
@@ -16,7 +14,7 @@ const PrivateRoute = () => {
           credentials: "include",
         });
         if (response.ok) {
-          console.log(response);
+          // //console.log(response);
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);

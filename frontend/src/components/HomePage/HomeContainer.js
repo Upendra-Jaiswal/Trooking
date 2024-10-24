@@ -35,7 +35,7 @@ const HomeContainer = () => {
         localStorage.removeItem("token");
 
         // Log a message or perform any other post-logout actions
-        console.log("Logged out successfully");
+        //console.log("Logged out successfully");
 
         // Redirect to a login page or home page, if needed
         // window.location.href = "/login"; // Uncomment and modify as needed

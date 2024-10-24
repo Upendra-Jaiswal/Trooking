@@ -12,34 +12,7 @@ const InfoBookById = () => {
   const location = useLocation();
   const { trip } = location.state || {}; // Get the trip info from the passed state
 
-  // useEffect(() => {
-  //   const fetchTrips = async () => {
-  //     try {
-  //       const response = await fetch(`${backendUrl}/api/trips`, {
-  //         method: "GET",
-  //         credentials: "include", // This is crucial to send cookies
-  //       });
-  //       const data = await response.json();
-  //       if (data.success) {
-  //         setTrips(data.data);
-  //         console.log(data.data)
-  //       }
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching trips:", error);
-  //       setLoading(false);
-  //     }
-  //   };
 
-  //   fetchTrips();
-  // }, []);
-
-  useEffect(() => {
-    console.log([trip], "data");
-  }, []);
-  // if (loading) {
-  //   return <div className="text-center text-lg font-semibold">Loading...</div>;
-  // }
 
   const toggleDay = (day) => {
     setOpenDay(openDay === day ? null : day); // Toggle open/close for the selected day
@@ -50,9 +23,7 @@ const InfoBookById = () => {
     transition: "transform 0.3s ease",
   });
 
-  // if (!trip) {
-  //   return <div>No trip information available.</div>; // Handle case where no trip is provided
-  // }
+
 
   return (
     <div className="flex min-h-screen ">
