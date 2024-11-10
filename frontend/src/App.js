@@ -31,6 +31,8 @@ import Finalbooking from "./components/Bookingbyid/Finalbooking";
 import { Provider } from "react-redux";
 
 import { useReducer, createContext } from "react";
+import PaymentSuccessPage from "./PaymentSuccessPage";
+import PaymentFailed from './PaymentFailed'
 
 export const AuthContextApp = createContext();
 
@@ -86,6 +88,12 @@ function App() {
                 <Route path="/mybookings" element={<MyBookings />} />
 
                 <Route path="/payment" element={<Payment />} />
+                <Route
+                  path="/payment-success"
+                  element={<PaymentSuccessPage />}
+                />
+                <Route path="/payment-fail" element={<PaymentFailed />} />
+
                 <Route path="/taxi-booking" element={<TaxiBooking />} />
 
                 <Route path="/bookingform" element={<BookingForm />} />

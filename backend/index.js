@@ -20,6 +20,8 @@ const PORT = process.env.PORT || 3001;
 require("dotenv").config(); // Load environment variables
 
 let salt_key = "96434309-7796-489d-8924-ab56988a6076";
+
+const MERCHANT_KEY = "96434309-7796-489d-8924-ab56988a6076";
 let merchant_id = "PGTESTPAYUAT86";
 
 // Load environment variables
@@ -92,6 +94,8 @@ app.get("/", (req, res) => {
   res.send("server running!");
 });
 
+const successUrl = "http://localhost:3000/payment-success";
+
 app.post("/order", async (req, res) => {
   try {
     let merchantTransactionId = req.body.transactionId;
@@ -101,7 +105,7 @@ app.post("/order", async (req, res) => {
       merchantTransactionId: merchantTransactionId,
       name: req.body.name,
       amount: req.body.amount * 100,
-      redirectUrl: `http://localhost:8000/status?id=${merchantTransactionId}`,
+      redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}`,
       redirectMode: "POST",
       mobileNumber: req.body.phone,
       paymentInstrument: {
@@ -136,6 +140,10 @@ app.post("/order", async (req, res) => {
     await axios(options)
       .then(function (response) {
         // //console.log(response.data);
+
+        const url = "http://localhost:3000/payment-success";
+        console.log("got here");
+        // return res.redirect(url);
         return res.json(response.data);
       })
       .catch(function (error) {
@@ -151,10 +159,16 @@ app.post("/status", async (req, res) => {
   const merchantId = merchant_id;
 
   const keyIndex = 1;
+  // const string =
+  //   `/pg/v1/status/${merchantId}/${merchantTransactionId}` + salt_key;
+
   const string =
-    `/pg/v1/status/${merchantId}/${merchantTransactionId}` + salt_key;
+    `/pg/v1/status/${merchantId}/${merchantTransactionId}` + MERCHANT_KEY;
+
   const sha256 = crypto.createHash("sha256").update(string).digest("hex");
   const checksum = sha256 + "###" + keyIndex;
+
+  console.log("status///1");
 
   const options = {
     method: "GET",
@@ -166,21 +180,44 @@ app.post("/status", async (req, res) => {
       "X-MERCHANT-ID": `${merchantId}`,
     },
   };
+  console.log("status///2");
 
   axios
     .request(options)
     .then(function (response) {
       if (response.data.success === true) {
-        const url = "http://localhost:5173/success";
-        return res.redirect(url);
+        // const url = "http://localhost:5173/success";
+        // const url = "http://localhost:3000/payment-success";
+        return res.redirect(successUrl);
       } else {
         const url = "http://localhost:5173/fail";
         return res.redirect(url);
       }
     })
     .catch(function (error) {
-      //console.log(error);
+      console.log(error);
     });
+
+  // try {
+  //   const response = await axios.request(options);
+  //   console.log("status here");
+  //   if (response.data.success === true) {
+  //     const url = "http://localhost:3000/payment-success";
+  //     return res.redirect(url);
+
+  //     // return res.json({ success: true, message: "Payment Successful" });
+  //   } else {
+  //     const url = "http://localhost:5173/payment-fail";
+  //     return res.redirect(url);
+
+  //     // return res.json({ success: false, message: "Payment Failed" });
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  //   res
+  //     .status(500)
+  //     .json({ success: false, message: "Error processing payment status" });
+  // }
 });
 
 // Start the server
