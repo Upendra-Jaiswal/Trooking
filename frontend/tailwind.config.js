@@ -18,6 +18,9 @@ module.exports = {
         extraBold: 800,
         black: 900,
       },
+      colors: {
+        customYellow: '#ebb434', // Replace 'customYellow' with your preferred name
+      },
     },
   },
   plugins: [],
