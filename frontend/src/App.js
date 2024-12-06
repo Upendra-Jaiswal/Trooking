@@ -83,7 +83,7 @@ function App() {
               <Route path="/bookingbyid" element={<BookingbyId />} />
               {/* <Route path="/" element={<PrivateRoute />}> */}
 
-              {/* <Route element={<PrivateRoute />}> */}
+              <Route element={<PrivateRoute />}>
 
               <Route path="/my-profile" element={<MyProfile />} />
 
@@ -105,7 +105,7 @@ function App() {
               <Route path="/getallbookings" element={<GetAllBookings />} />
               <Route path="/getuserbookings" element={<GetUserBookings />} />
               <Route path="/finalbooking" element={<Finalbooking />} />
-              {/* </Route> */}
+              </Route>
             </Routes>
           </div>
         </Router>
