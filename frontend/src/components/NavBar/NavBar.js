@@ -224,6 +224,20 @@ const NavBar = () => {
                     />
                     <span className="text-gray-700">{user.username}</span>
                   </div>
+                  <Link
+                    to="/my-profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    My Profile
+                  </Link>
+                  <a
+                    href="#settings"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={closeDropdown}
+                  >
+                    Settings
+                  </a>
                   <div>
                     <a
                       href="#logout"

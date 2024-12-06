@@ -91,6 +91,7 @@ const UserBookings = () => {
         const response = await axios.get(`${backendUrl}/api/getuserbookings`, {
           withCredentials: true, // Send cookies for authentication
         });
+        console.log(response);
         setBookings(response.data.data); // Set fetched booking data
       } catch (err) {
         setError(err.response ? err.response.data : "Error fetching bookings");

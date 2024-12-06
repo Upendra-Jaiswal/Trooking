@@ -36,6 +36,7 @@ const createBooking = async (req, res) => {
 // Get all trip bookings
 const getAllBookings = async (req, res) => {
   try {
+    console.log("data",req.user);
     const bookings = await TripBooking.find().populate("user trip"); // Populate user and trip details
     res.status(200).json({ success: true, data: bookings });
   } catch (error) {
@@ -47,8 +48,13 @@ const getAllBookings = async (req, res) => {
 // Get bookings by user ID
 const getUserBookings = async (req, res) => {
   try {
+    console.log(req.user)
+
+    const userId = req.user.id;
+
+
     // Find bookings that match the user's ID from the request
-    const bookings = await TripBooking.find({ user: req.user.id }).populate(
+    const bookings = await TripBooking.find({ user: userId }).populate(
       "trip"
     );
 

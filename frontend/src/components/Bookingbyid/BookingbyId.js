@@ -68,6 +68,8 @@ const MyComponent = () => {
   const [isSlidingOut, setIsSlidingOut] = useState(false);
   const [isSlidingIn, setIsSlidingIn] = useState(false);
 
+  const [numberOfPersons, setNumberOfPersons] = useState(1);
+
   useEffect(() => {
     const interval = setInterval(() => {
       // Start the slide-out animation
@@ -505,43 +507,85 @@ const MyComponent = () => {
           </div>
         </div>
 
-        {/* Second Column - 30% width with half of the screen height */}
-        <div className="w-5/12 flex flex-col h-full bg-white rounded-2xl p-8 m-3">
-          {/* First Row - Starting From Text */}
-          <div className="h-1/4 mb-2 p-4 rounded flex items-center">
-            <h2 className="text-black font-bold text-xl">Starting From</h2>
+        {/* Second Column - Booking Information */}
+        <div className="w-5/12 h-full bg-white rounded-2xl shadow-lg p-6 m-3 flex flex-col justify-between">
+          {/* Booking Details */}
+          <div className="mb-6">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+              Booking for {trip.name}
+              {trip._id}
+            </h1>
+            <p className="text-gray-600 text-lg mb-1">
+              Price (Per Person):{" "}
+              <span className="font-semibold text-gray-800">₹{trip.price}</span>
+            </p>
+            <p className="text-gray-600 text-lg mb-1">
+              Route:{" "}
+              <span className="font-semibold text-gray-800">{trip.route}</span>
+            </p>
+            <p className="text-gray-600 text-lg">
+              Duration:{" "}
+              <span className="font-semibold text-gray-800">
+                {trip.duration}
+              </span>
+            </p>
           </div>
 
-          {/* Second Row - Pricing Information */}
-          <div className="h-1/4 flex mb-2 p-0 rounded">
-            {/* First Column - 2/12 width */}
-            <div className="w-2/12 text-center p-2">
-              <p className="line-through text-red-500 text-lg">
-                ₹{trip.price + 2000}
-              </p>
+          {/* Starting From Section */}
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-700">
+              Starting From
+            </h2>
+          </div>
+
+          {/* Dropdown and Total Price */}
+          <div className="flex items-center mb-6">
+            {/* Dropdown for Number of Persons */}
+            <div className="w-6/12">
+              <label
+                htmlFor="persons"
+                className="block text-gray-600 font-medium mb-1"
+              >
+                Number of Persons
+              </label>
+              <select
+                id="persons"
+                className="w-full bg-gray-50 border border-gray-300 text-gray-700 text-lg rounded-lg p-2"
+                onChange={(e) => setNumberOfPersons(e.target.value)}
+              >
+                {[...Array(10).keys()].map((i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* Second Column - 2/12 width */}
-            <div className="w-2/12 text-center p-2">
-              <p className="text-2xl font-bold text-gray-400">₹{trip.price}</p>
-            </div>
-
-            {/* Third Column - 8/12 width */}
-            <div className="w-8/12 flex justify-end items-center p-2">
-              <p className="text-gray-700 bg-blue-200 rounded-2xl px-4 text-center">
-                Per Person
+            {/* Total Price */}
+            <div className="w-6/12 text-right">
+              <p className="text-gray-800 text-lg font-bold">
+                Total: ₹{numberOfPersons * trip.price}
               </p>
             </div>
           </div>
 
-          {/* Third Row - Book Now Button */}
-          <div className="h-1/2 mb-2 p-4 flex items-center justify-center">
-            {/* <Link to="/payment" amount={{ amount }}> */}
-            {/* <Link to="/payment" state={{ amount }}> */}
-            <Link to="/payment" state={{ amount: trip.price }}>
-              {" "}
-              <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-2xl w-full">
-                {/* <Payment amount={amount} />  */}
+          {/* Book Now Button */}
+          <div className="flex justify-center">
+            <Link
+              to="/payment"
+              // state={{ amount: numberOfPersons * trip.price }}
+              state={{
+                amount: numberOfPersons * trip.price,
+                bookingDetails: {
+                  tripId:trip._id,
+                  tripName: trip.name,
+                  route: trip.route,
+                  duration: trip.duration,
+                  numberOfPersons,
+                },
+              }}
+            >
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md w-full">
                 Book Now
               </button>
             </Link>

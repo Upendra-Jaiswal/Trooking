@@ -67,7 +67,7 @@ app.use("/api", taxiBookingRoutes);
 
 app.use("/api", tripRoutes);
 // app.use("/api", bookingRoutes);
-app.use("/api", tripBookingRoutes);
+app.use("/api", protected, tripBookingRoutes);
 //app.use("/api", userRoutes);
 //app.use("/api", authMiddleware, user1Routes);
 //app.use("/api", authMiddleware, userRoutes);
@@ -90,13 +90,21 @@ app.get("/get-cookie", (req, res) => {
 // let salt_key = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399'
 // let merchant_id = 'PGTESTPAYUAT'
 
-app.get("/", (req, res) => {
-  res.send("server running!");
+// app.get("/", (req, res) => {
+//   res.send("server running!", req);
+// });
+app.get("/", protected, (req, res) => {
+  res.json({
+    message: "Server running!",
+    user: req.user || null, // Include user information if available
+  });
 });
 
 const successUrl = "http://localhost:3000/payment-success";
 
 app.post("/order", async (req, res) => {
+
+  console.log(req.body);
   try {
     let merchantTransactionId = req.body.transactionId;
 
@@ -105,6 +113,7 @@ app.post("/order", async (req, res) => {
       merchantTransactionId: merchantTransactionId,
       name: req.body.name,
       amount: req.body.amount * 100,
+      bookingDetails: req.body.bookingDetails,
       redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}`,
       redirectMode: "POST",
       mobileNumber: req.body.phone,
@@ -142,7 +151,7 @@ app.post("/order", async (req, res) => {
         // //console.log(response.data);
 
         const url = "http://localhost:3000/payment-success";
-        console.log("got here");
+
         // return res.redirect(url);
         return res.json(response.data);
       })
@@ -168,8 +177,6 @@ app.post("/status", async (req, res) => {
   const sha256 = crypto.createHash("sha256").update(string).digest("hex");
   const checksum = sha256 + "###" + keyIndex;
 
-  console.log("status///1");
-
   const options = {
     method: "GET",
     url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`,
@@ -180,23 +187,66 @@ app.post("/status", async (req, res) => {
       "X-MERCHANT-ID": `${merchantId}`,
     },
   };
-  console.log("status///2");
 
   axios
     .request(options)
-    .then(function (response) {
+    .then(async function (response) {
       if (response.data.success === true) {
-        // const url = "http://localhost:5173/success";
-        // const url = "http://localhost:3000/payment-success";
-        return res.redirect(successUrl);
+        try {
+          // Extract details from the request or payment response
+          const { tripId, numberOfPassengers } = req.body;
+
+          // Check if the trip exists and create booking
+          const trip = await Trip.findById(tripId);
+          if (!trip) {
+            return res
+              .status(404)
+              .json({ success: false, message: "Trip not found" });
+          }
+
+          const totalPrice = trip.price * numberOfPassengers;
+
+          const booking = await TripBooking.create({
+            user: req.user.id, // Assuming req.user is populated via middleware
+            trip: tripId,
+            numberOfPassengers,
+            totalPrice,
+          });
+
+          console.log("Booking created successfully:", booking);
+
+          // Redirect to success URL
+          return res.redirect(successUrl);
+        } catch (error) {
+          console.error("Error creating booking:", error);
+          return res
+            .status(500)
+            .json({ success: false, message: "Booking creation failed" });
+        }
       } else {
-        const url = "http://localhost:5173/fail";
-        return res.redirect(url);
+        return res.redirect(failureUrl);
       }
     })
     .catch(function (error) {
-      console.log(error);
+      console.error("Error processing payment:", error);
+      return res.redirect(failureUrl);
     });
+
+  // axios
+  //   .request(options)
+  //   .then(function (response) {
+  //     if (response.data.success === true) {
+  //       // const url = "http://localhost:5173/success";
+  //       // const url = "http://localhost:3000/payment-success";
+  //       return res.redirect(successUrl);
+  //     } else {
+  //       const url = "http://localhost:5173/fail";
+  //       return res.redirect(url);
+  //     }
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 
   // try {
   //   const response = await axios.request(options);

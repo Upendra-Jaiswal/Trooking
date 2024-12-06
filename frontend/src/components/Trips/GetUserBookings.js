@@ -13,6 +13,7 @@ const GetUserBookings = () => {
         const response = await axios.get(`${backendUrl}/api/getuserbookings`, {
           withCredentials: true, // Ensure cookies are sent with the request
         });
+        console.log(response)
         setBookings(response.data.data);
         //console.log(response.data.data, "data");
       } catch (err) {

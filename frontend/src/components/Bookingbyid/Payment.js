@@ -8,7 +8,10 @@ const Payment = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   const location = useLocation();
-  const amount = location.state?.amount;
+  // const amount = location.state?.amount;
+
+  // Extract the state passed through Link
+  const { amount, bookingDetails } = location.state || {};
 
   // Handle Payment Request
   const handlePayment = async () => {
@@ -20,6 +23,7 @@ const Payment = () => {
       number: 9691134534, // Can also be passed dynamically if needed
       MUID: "MUID" + Date.now(),
       transactionId: "T" + Date.now(),
+      bookingDetails:bookingDetails,
     };
 
     //console.log(data);

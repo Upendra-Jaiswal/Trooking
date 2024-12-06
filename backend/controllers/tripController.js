@@ -73,7 +73,10 @@ const bookTrip = async (req, res) => {
 // Get all bookings for a user
 const getUserBookings = async (req, res) => {
   try {
+    console.log("data",req);
     const userId = req.user.id; // Assuming user ID is stored in req.user after authentication
+
+    // console.log(userId);
 
     // Fetch all bookings associated with the user and populate trip details
     const bookings = await Booking.find({ user: userId })
