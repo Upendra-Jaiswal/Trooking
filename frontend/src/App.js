@@ -19,7 +19,7 @@ import TaxiBooking from "./components/MyProfile/TaxiBooking";
 import Navbar from "./components/NavBar/NavBar";
 import BookingForm from "./components/Trips/GetAllBookings";
 import TripList from "./components/Trips/TripList";
-import UserBookings from "./components/NavBar/UserBokings";
+
 import Bookings from "./components/NavBar/Bookings";
 import AllBookings from "./components/Trips/AllBookings";
 import CreateBooking from "./components/Trips/CreateBooking";
@@ -32,37 +32,37 @@ import { Provider } from "react-redux";
 
 import { useReducer, createContext } from "react";
 import PaymentSuccessPage from "./PaymentSuccessPage";
-import PaymentFailed from './PaymentFailed'
+import PaymentFailed from "./PaymentFailed";
 
 export const AuthContextApp = createContext();
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState("");
+  // const [userName, setUserName] = useState("");
 
-  useEffect(() => {
-    // Simulating an authentication check
-    const checkAuth = async () => {
-      // Fetch or check authentication status here
+  // useEffect(() => {
+  //   // Simulating an authentication check
+  //   const checkAuth = async () => {
+  //     // Fetch or check authentication status here
 
-      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  //     const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-      // This is just a placeholder for demonstration
-      const user = await fetch(`${backendUrl}/api/verifyauth`, {
-        method: "GET",
-        credentials: "include",
-      });
+  //     // This is just a placeholder for demonstration
+  //     const user = await fetch(`${backendUrl}/api/verifyauth`, {
+  //       method: "GET",
+  //       credentials: "include",
+  //     });
 
-      if (user.ok) {
-        //setIsAuthenticated(true);
-        setUserName("John Doe"); // Replace with actual user name from the response
-      } else {
-        // setIsAuthenticated(false);
-      }
-    };
+  //     if (user.ok) {
+  //       //setIsAuthenticated(true);
+  //       setUserName("John Doe"); // Replace with actual user name from the response
+  //     } else {
+  //       // setIsAuthenticated(false);
+  //     }
+  //   };
 
-    checkAuth();
-  }, [userName]);
+  //   checkAuth();
+  // }, [userName]);
 
   return (
     <AuthProvider>
@@ -82,31 +82,30 @@ function App() {
               <Route path="/" element={<HomeContainer />} />
               <Route path="/bookingbyid" element={<BookingbyId />} />
               {/* <Route path="/" element={<PrivateRoute />}> */}
-              <Route element={<PrivateRoute />}>
-                <Route path="/my-profile" element={<MyProfile />} />
 
-                <Route path="/mybookings" element={<MyBookings />} />
+              {/* <Route element={<PrivateRoute />}> */}
 
-                <Route path="/payment" element={<Payment />} />
-                <Route
-                  path="/payment-success"
-                  element={<PaymentSuccessPage />}
-                />
-                <Route path="/payment-fail" element={<PaymentFailed />} />
+              <Route path="/my-profile" element={<MyProfile />} />
 
-                <Route path="/taxi-booking" element={<TaxiBooking />} />
+              <Route path="/mybookings" element={<MyBookings />} />
 
-                <Route path="/bookingform" element={<BookingForm />} />
-                <Route path="/triplist" element={<TripList />} />
-                {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
-                <Route path="/bookings" element={<Bookings />} />
-                <Route path="/allbookings" element={<AllBookings />} />
-                <Route path="/createbooking" element={<CreateBooking />} />
-                <Route path="/fetchtrip" element={<FetchTrip />} />
-                <Route path="/getallbookings" element={<GetAllBookings />} />
-                <Route path="/getuserbookings" element={<GetUserBookings />} />
-                <Route path="/finalbooking" element={<Finalbooking />} />
-              </Route>
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/payment-success" element={<PaymentSuccessPage />} />
+              <Route path="/payment-fail" element={<PaymentFailed />} />
+
+              <Route path="/taxi-booking" element={<TaxiBooking />} />
+
+              <Route path="/bookingform" element={<BookingForm />} />
+              <Route path="/triplist" element={<TripList />} />
+              {/* <Route path="/getuserbookings" element={<UserBookings />} /> */}
+              <Route path="/bookings" element={<Bookings />} />
+              <Route path="/allbookings" element={<AllBookings />} />
+              <Route path="/createbooking" element={<CreateBooking />} />
+              <Route path="/fetchtrip" element={<FetchTrip />} />
+              <Route path="/getallbookings" element={<GetAllBookings />} />
+              <Route path="/getuserbookings" element={<GetUserBookings />} />
+              <Route path="/finalbooking" element={<Finalbooking />} />
+              {/* </Route> */}
             </Routes>
           </div>
         </Router>

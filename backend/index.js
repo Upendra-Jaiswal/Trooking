@@ -61,11 +61,11 @@ app.use((err, req, res, next) => {
   res.status(500).send("Server Error");
 });
 
-app.use("/api", authRoutes);
-app.use("/api", userRoutes);
-app.use("/api", taxiBookingRoutes);
+app.use("/api", protected,authRoutes);
+app.use("/api",protected, userRoutes);
+app.use("/api", protected,taxiBookingRoutes);
 
-app.use("/api", tripRoutes);
+app.use("/api", protected,tripRoutes);
 // app.use("/api", bookingRoutes);
 app.use("/api", protected, tripBookingRoutes);
 //app.use("/api", userRoutes);
