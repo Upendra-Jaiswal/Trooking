@@ -63,6 +63,7 @@ const TripSelection = () => {
   }, [backendUrl]);
 
   const handleBookClick = (trip) => {
+    console.log(trip);
     navigate("/bookingbyid", { state: { trip } }); // Pass the selected trip as state
   };
   return (
