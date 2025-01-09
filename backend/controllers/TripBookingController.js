@@ -2,41 +2,101 @@ const TripBooking = require("../models/TripBooking");
 const Trip = require("../models/tripModel");
 const User = require("../models/userModel");
 
-// Create a new trip booking
+// const createBooking = async () => {
+//   try {
+//     const newTripBooking = new TripBooking(tripBookingData);
+//     await newTripBooking.save();
+//     console.log("Trip Booking Created Successfully:", newTripBooking);
+//   } catch (error) {
+//     console.error("Error creating trip booking:", error);
+//   }
+// };
+
 const createBooking = async (req, res) => {
   try {
-    const { tripId, numberOfPassengers } = req.body;
+    const { merchantTransactionId, name, bookingDetails, amount } = req.body;
 
-    // Check if the trip exists
-    const trip = await Trip.findById(tripId);
-    if (!trip) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Trip not found" });
-    }
-
-    // Calculate total price
-    const totalPrice = trip.price * numberOfPassengers;
-
-    // Create a new booking
-    const booking = await TripBooking.create({
-      user: req.user.id, // Assuming user ID is in the request object from authentication middleware
-      trip: tripId,
-      numberOfPassengers,
-      totalPrice,
+    // Create a new trip booking object using the data from the request body
+    const newTripBooking = new TripBooking({
+      merchantTransactionId,
+      name,
+      bookingDetails,
+      amount,
+      status: "confirmed", // Default status as "pending"
     });
 
-    res.status(201).json({ success: true, data: booking });
+    // Save the new trip booking to the database
+    await newTripBooking.save();
+
+    // Log success
+    console.log("Trip Booking Created Successfully:", newTripBooking);
+
+    // Send a successful response back to the client
+    res.status(201).json({
+      success: true,
+      booking: newTripBooking,
+    });
   } catch (error) {
-    console.error("Error creating booking:", error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    // Log error
+    console.error("Error creating trip booking:", error);
+
+    // Send an error response back to the client
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
+
+// Create a new trip booking
+// const createBooking2 = async (req, res) => {
+//   try {
+//     const { tripId, numberOfPassengers } = req.body;
+
+//     // Check if the trip exists
+//     const trip = await Trip.findById(tripId);
+//     if (!trip) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Trip not found" });
+//     }
+
+//     // Calculate total price
+//     //const totalPrice = trip.price * numberOfPassengers;
+
+//     // Create a new booking
+//     // const booking = await TripBooking.create({
+//     //   user: req.user.id, // Assuming user ID is in the request object from authentication middleware
+//     //   trip: tripId,
+//     //   numberOfPassengers,
+//     //   totalPrice,
+//     // });
+
+//     const booking = await TripBooking.create({
+//       // Merchant Transaction ID: T1736274289655
+//       // Name: UJ
+//       // Booking Details: {"tripId":"66f6c5b48c509088d250432d","tripName":"Kunwari Pass","route":"Haridwar to Haridwar","duration":"6 Days / 5 Nights","numberOfPersons":1}
+//       // Amount: 1050000,
+
+//       merchnat
+
+//       user: req.user.id, // Assuming user ID is in the request object from authentication middleware
+//       trip: tripId,
+//       numberOfPassengers,
+//       totalPrice,
+//     });
+
+//     res.status(201).json({ success: true, data: booking });
+//   } catch (error) {
+//     console.error("Error creating booking:", error);
+//     res.status(500).json({ success: false, message: "Server Error" });
+//   }
+// };
 
 // Get all trip bookings
 const getAllBookings = async (req, res) => {
   try {
-    console.log("data",req.user);
+    //  console.log("data",req.user);
     const bookings = await TripBooking.find().populate("user trip"); // Populate user and trip details
     res.status(200).json({ success: true, data: bookings });
   } catch (error) {
@@ -48,15 +108,12 @@ const getAllBookings = async (req, res) => {
 // Get bookings by user ID
 const getUserBookings = async (req, res) => {
   try {
-    console.log(req.user)
+    //  console.log(req.user)
 
     const userId = req.user.id;
 
-
     // Find bookings that match the user's ID from the request
-    const bookings = await TripBooking.find({ user: userId }).populate(
-      "trip"
-    );
+    const bookings = await TripBooking.find({ user: userId }).populate("trip");
 
     // If no bookings are found, return an appropriate message
     if (!bookings || bookings.length === 0) {

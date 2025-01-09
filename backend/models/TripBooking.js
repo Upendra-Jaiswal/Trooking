@@ -3,33 +3,50 @@ const mongoose = require("mongoose");
 // Define the TripBooking schema
 const tripBookingSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
-      required: true,
+    merchantTransactionId: {
+      type: String,
+      required: true, // Merchant Transaction ID is required
     },
-    trip: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Trip", // Reference to the Trip model
-      required: true,
+    name: {
+      type: String,
+      required: true, // Name is required
     },
-    bookingDate: {
-      type: Date,
-      default: Date.now, // Automatically set to the current date
+    bookingDetails: {
+      type: Object,
+      required: true, // Ensure bookingDetails is always provided
     },
-    numberOfPassengers: {
+    // bookingDetails: {
+    //   tripId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Trip", // Reference to the Trip model
+    //      required: true, // tripId is required
+    //   },
+    //   tripName: {
+    //     type: String,
+    //     required: true, // tripName is required
+    //   },
+    //   route: {
+    //     type: String,
+    //      required: true, // route is required
+    //   },
+    //   duration: {
+    //     type: String,
+    //      required: true, // duration is required
+    //   },
+    //   numberOfPersons: {
+    //     type: Number,
+    //       required: true, // numberOfPersons is required
+    //     // min: 1, // Minimum of one person
+    //   },
+    // },
+    amount: {
       type: Number,
-      required: true,
-      min: 1, // At least one passenger
-    },
-    totalPrice: {
-      type: Number,
-      required: true,
+      required: true, // amount is required
     },
     status: {
       type: String,
-      enum: ["confirmed", "canceled", "pending"], // Possible statuses for the booking
-      default: "pending", // Default status
+      enum: ["confirmed", "canceled", "pending"], // Possible statuses
+      default: "pending", // Default to "pending" status
     },
   },
   {

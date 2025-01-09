@@ -4,6 +4,9 @@ const loadEnv = require("./config/env");
 const cookieParser = require("cookie-parser");
 const crypto = require("crypto");
 const axios = require("axios");
+const bodyParser = require("body-parser");
+
+const TripBooking = require("./models/TripBooking");
 
 const authRoutes = require("./routes/authRoutes"); //authroutes
 const userRoutes = require("./routes/userRoutes");
@@ -35,6 +38,10 @@ app.use(express.json());
 // app.use(cors());
 app.use(cookieParser());
 
+app.use(bodyParser.json()); // Parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+
 const allowedOrigins = process.env.ORIGIN;
 
 const corsOptions = {
@@ -63,9 +70,9 @@ app.use((err, req, res, next) => {
 
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
-app.use("/api", protected,taxiBookingRoutes);
+app.use("/api", protected, taxiBookingRoutes);
 
-app.use("/api", protected,tripRoutes);
+app.use("/api", protected, tripRoutes);
 // app.use("/api", bookingRoutes);
 app.use("/api", protected, tripBookingRoutes);
 //app.use("/api", userRoutes);
@@ -103,8 +110,7 @@ app.get("/", protected, (req, res) => {
 const successUrl = "http://localhost:3000/payment-success";
 
 app.post("/order", async (req, res) => {
-
-  console.log(req.body);
+  // console.log(req.body);
   try {
     let merchantTransactionId = req.body.transactionId;
 
@@ -114,7 +120,12 @@ app.post("/order", async (req, res) => {
       name: req.body.name,
       amount: req.body.amount * 100,
       bookingDetails: req.body.bookingDetails,
-      redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}`,
+      // redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}`,
+      redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}&name=${encodeURIComponent(
+        req.body.name
+      )}&bookingDetails=${encodeURIComponent(
+        JSON.stringify(req.body.bookingDetails)
+      )}&amount=${encodeURIComponent(req.body.amount * 100)}`,
       redirectMode: "POST",
       mobileNumber: req.body.phone,
       paymentInstrument: {
@@ -164,8 +175,26 @@ app.post("/order", async (req, res) => {
 });
 
 app.post("/status", async (req, res) => {
-  const merchantTransactionId = req.query.id;
+  //console.log("all req req user here", req.user);
+  //const merchantTransactionId = req.query.id;
   const merchantId = merchant_id;
+  //console.log(req.query);
+
+  const { id: merchantTransactionId, name, bookingDetails, amount } = req.query;
+
+  // If bookingDetails was encoded as JSON, parse it
+  // let parsedBookingDetails;
+  // try {
+  //   parsedBookingDetails = JSON.parse(decodeURIComponent(bookingDetails));
+  // } catch (error) {
+  //   parsedBookingDetails = bookingDetails; // Fallback to raw value if not JSON
+  // }
+
+  // Logging or processing the data
+  console.log("Merchant Transaction ID:", merchantTransactionId);
+  console.log("Name:", name);
+  console.log("Booking Details:", bookingDetails);
+  console.log("Amount:", amount);
 
   const keyIndex = 1;
   // const string =
@@ -193,27 +222,58 @@ app.post("/status", async (req, res) => {
     .then(async function (response) {
       if (response.data.success === true) {
         try {
-          // Extract details from the request or payment response
-          const { tripId, numberOfPassengers } = req.body;
+          // const bookingData = {
+          //   merchantTransactionId,
+          //   name,
+          //   bookingDetails,
+          //   amount,
 
-          // Check if the trip exists and create booking
-          const trip = await Trip.findById(tripId);
-          if (!trip) {
-            return res
-              .status(404)
-              .json({ success: false, message: "Trip not found" });
-          }
+          //   // bookingDetails: JSON.parse(bookingDetails), // Assuming bookingDetails is a JSON string
+          //   // amount: amount * 100, // Example: converting amount to a smaller unit if needed
+          // };
 
-          const totalPrice = trip.price * numberOfPassengers;
+        //  req.body = bookingData; // Simulate the body as if it came from a real POST request
 
-          const booking = await TripBooking.create({
-            user: req.user.id, // Assuming req.user is populated via middleware
-            trip: tripId,
-            numberOfPassengers,
-            totalPrice,
+        
+          const newTripBooking = new TripBooking({
+            merchantTransactionId,
+            name,
+           bookingDetails,
+            amount,
+            status: "confirmed", // Default status as "pending"
           });
 
-          console.log("Booking created successfully:", booking);
+          // Save the new trip booking to the database
+          await newTripBooking.save();
+
+          // Log success
+          console.log("Trip Booking Created Successfully:", newTripBooking);
+
+          // Call the route handler directly
+          // return tripBookingRoutes.createBooking(req, res);
+
+          // const booking = await TripBooking.create({
+          //   merchantTransactionId,
+          //   name,
+          //   bookingDetails: {
+          //     tripId: tripId,
+          //     tripName: trip.name,
+          //     route: trip.route,
+          //     duration: trip.duration,
+          //     numberOfPersons: numberOfPassengers,
+          //   },
+          //   amount: amount,
+          //   status: "pending", // You can modify this if needed
+          // });
+
+          // const booking = await TripBooking.create({
+          //   user: req.user.id, // Assuming req.user is populated via middleware
+          //   trip: tripId,
+          //   numberOfPassengers,
+          //   totalPrice,
+          // });
+
+          //  console.log("Booking created successfully:", booking);
 
           // Redirect to success URL
           return res.redirect(successUrl);
@@ -231,6 +291,22 @@ app.post("/status", async (req, res) => {
       console.error("Error processing payment:", error);
       return res.redirect(failureUrl);
     });
+
+  // Extract details from the request or payment response
+  //   const { tripId, numberOfPassengers } = req.query;
+  // console.log("reached here 1", req.body);
+  // Check if the trip exists and create booking
+
+  //   const trip = await Trip.findById(tripId);
+
+  //  console.log("reached here 2");
+  // if (!trip) {
+  //   return res
+  //     .status(404)
+  //     .json({ success: false, message: "Trip not found" });
+  // }
+  // console.log("reached here 3");
+  // const totalPrice = trip.price * numberOfPassengers;
 
   // axios
   //   .request(options)
