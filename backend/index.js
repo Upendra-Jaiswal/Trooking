@@ -41,7 +41,6 @@ app.use(cookieParser());
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-
 const allowedOrigins = process.env.ORIGIN;
 
 const corsOptions = {
@@ -107,7 +106,9 @@ app.get("/", protected, (req, res) => {
   });
 });
 
-const successUrl = "http://localhost:3000/payment-success";
+const successUrl = `${process.env.ORIGIN}/payment-success`;
+
+// const successUrl = "http://localhost:3000/payment-success";
 
 app.post("/order", async (req, res) => {
   // console.log(req.body);
@@ -121,7 +122,9 @@ app.post("/order", async (req, res) => {
       amount: req.body.amount * 100,
       bookingDetails: req.body.bookingDetails,
       // redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}`,
-      redirectUrl: `http://localhost:3001/status?id=${merchantTransactionId}&name=${encodeURIComponent(
+      redirectUrl: `${
+        process.env.BACKEND
+      }/status?id=${merchantTransactionId}&name=${encodeURIComponent(
         req.body.name
       )}&bookingDetails=${encodeURIComponent(
         JSON.stringify(req.body.bookingDetails)
@@ -161,7 +164,8 @@ app.post("/order", async (req, res) => {
       .then(function (response) {
         // //console.log(response.data);
 
-        const url = "http://localhost:3000/payment-success";
+        // const url = "http://localhost:3000/payment-success";
+        const url = `${process.env.ORIGIN}/payment-success`;
 
         // return res.redirect(url);
         return res.json(response.data);
@@ -232,13 +236,12 @@ app.post("/status", async (req, res) => {
           //   // amount: amount * 100, // Example: converting amount to a smaller unit if needed
           // };
 
-        //  req.body = bookingData; // Simulate the body as if it came from a real POST request
+          //  req.body = bookingData; // Simulate the body as if it came from a real POST request
 
-        
           const newTripBooking = new TripBooking({
             merchantTransactionId,
             name,
-           bookingDetails,
+            bookingDetails,
             amount,
             status: "confirmed", // Default status as "pending"
           });
