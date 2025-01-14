@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const NavBar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, isAuthenticated, login, logout } = useContext(AuthContext);
+  const { user, isAuthenticated, logout } = useContext(AuthContext);
 
   const profileRef = useRef(null);
 
@@ -18,7 +18,7 @@ const NavBar = () => {
     logout();
   };
 
-  const navigate = useNavigate();
+
 
   const toggleProfileDropdown = () => {
     setIsProfileOpen((prev) => !prev);

@@ -13,13 +13,9 @@ import React, { useContext, useState } from "react";
 const MyProfile = () => {
   const [activeSection, setActiveSection] = useState("Dashboard");
   const {
-    isAuthenticated,
-    userName,
-    setIsAuthenticated,
-    setUserName,
-    userData,
+   
     isAdmin,
-    setIsAdmin,
+   
   } = useContext(AuthContext);
 
   const renderContent = () => {

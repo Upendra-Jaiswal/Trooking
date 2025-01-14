@@ -4,11 +4,11 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
+  
 } from "react-router-dom";
 import SignUp from "./components/HomePage/Authentication/SignUp";
 import SignIn from "./components/HomePage/Authentication/SignIn";
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import { TripProvider } from "./context/TripContext";
 import PrivateRoute from "./PrivateRoute";
 import MyProfile from "./components/NavBar/MyProfile";
@@ -28,41 +28,16 @@ import GetAllBookings from "./components/Trips/GetAllBookings";
 import GetUserBookings from "./components/Trips/GetUserBookings";
 import Finalbooking from "./components/Bookingbyid/Finalbooking";
 
-import { Provider } from "react-redux";
 
-import { useReducer, createContext } from "react";
+
+import {  createContext } from "react";
 import PaymentSuccessPage from "./PaymentSuccessPage";
 import PaymentFailed from "./PaymentFailed";
 
 export const AuthContextApp = createContext();
 
 function App() {
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [userName, setUserName] = useState("");
 
-  // useEffect(() => {
-  //   // Simulating an authentication check
-  //   const checkAuth = async () => {
-  //     // Fetch or check authentication status here
-
-  //     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-  //     // This is just a placeholder for demonstration
-  //     const user = await fetch(`${backendUrl}/api/verifyauth`, {
-  //       method: "GET",
-  //       credentials: "include",
-  //     });
-
-  //     if (user.ok) {
-  //       //setIsAuthenticated(true);
-  //       setUserName("John Doe"); // Replace with actual user name from the response
-  //     } else {
-  //       // setIsAuthenticated(false);
-  //     }
-  //   };
-
-  //   checkAuth();
-  // }, [userName]);
 
   return (
     <AuthProvider>

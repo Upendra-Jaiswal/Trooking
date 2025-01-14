@@ -15,16 +15,7 @@ const ImageSlider = ({ images, interval = 1500 }) => {
 
   return (
     <div className="flex overflow-hidden rounded-lg shadow-md">
-      {/* {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Slide ${index + 1}`}
-          className={`w-full h-64 object-cover transition-opacity duration-1000 ease-in-out ${
-            currentImageIndex === index ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))} */}
+    
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 import img01 from "../../assets/tripsimages/IMG_5854.JPG";
 import img02 from "../../assets/tripsimages/IMG_5855.JPG";
 import img03 from "../../assets/tripsimages/IMG_5856.JPG";

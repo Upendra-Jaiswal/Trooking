@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import animationimage from "./animationimage.gif";
+
 import loginanimation from "./loginanimation.gif";
 
-import { AuthContext } from "../../../context/AuthContext"; // Import the AuthContext
 
 const SignUp = () => {
   const [email, setEmail] = useState("");

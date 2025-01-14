@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  FaUsers,
-  FaFemale,
-  FaHiking,
-  FaSmile,
-  FaBus,
-  FaUserFriends,
-} from "react-icons/fa"; // Importing icons
+
 
 import whoChooseUsSmall1 from "../../assets/whoChooseUsSmall1.png";
 import whoChooseUsSmall2 from "../../assets/whoChooseUsSmall2.png";
